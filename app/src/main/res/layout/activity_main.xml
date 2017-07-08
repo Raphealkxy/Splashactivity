@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.timmy.splashactivity.MainActivity">
+
+<!--标题栏-->
+
+
+   <!-- framelayout-->
+    <FrameLayout
+        android:id="@+id/fl_main_content"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp">
+
+    </FrameLayout>
+
+    <!--RadioGroup-->
+    <RadioGroup
+        android:id="@+id/rg_bottom_tag"
+        android:padding="3dp"
+        android:gravity="center_vertical"
+        android:background="#11000000"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+        android:drawableTop="@drawable/rb_firstpage_drawable_selector"
+        android:text="首页"
+        android:id="@+id/rb_firstPage"
+        style="@style/bottom_tag_style"
+        />
+
+        <RadioButton
+            android:drawableTop="@drawable/rb_secondpage_drawable_selector"
+            android:text="第二"
+            android:id="@+id/rb_secondPage"
+            style="@style/bottom_tag_style"
+            />
+
+        <RadioButton
+            android:drawableTop="@drawable/rb_thirdpage_drawable_selector"
+            android:text="第三"
+            android:id="@+id/rb_thirthPage"
+            style="@style/bottom_tag_style"
+            />
+
+        <RadioButton
+            android:drawableTop="@drawable/rb_forthpage_drawable_selector"
+            android:text="第四"
+            android:id="@+id/rb_forthPage"
+            style="@style/bottom_tag_style"
+            />
+
+
+    </RadioGroup>
+
+
+
+</LinearLayout>
