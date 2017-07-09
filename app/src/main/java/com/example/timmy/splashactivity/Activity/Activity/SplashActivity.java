@@ -1,4 +1,4 @@
-package com.example.timmy.splashactivity;
+package com.example.timmy.splashactivity.Activity.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
+
+import com.example.timmy.splashactivity.R;
 
 public class SplashActivity extends Activity {
 

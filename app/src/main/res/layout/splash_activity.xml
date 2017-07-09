@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
   
-    tools:context="com.example.timmy.splashactivity.SplashActivity">
+    tools:context="com.example.timmy.splashactivity.Activity.Activity.SplashActivity">
 
     <ImageView
         android:id="@+id/imgae_load"
