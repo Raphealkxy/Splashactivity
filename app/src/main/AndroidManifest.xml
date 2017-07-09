@@ -15,9 +15,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.Activity.MainActivity" android:launchMode="singleTask">
-            <!--当前activity自启动一次-->
+        <activity
+            android:name=".Activity.Activity.MainActivity"
+            android:launchMode="singleTask">
+
+            <!-- 当前activity自启动一次 -->
         </activity>
+        <activity android:name=".Activity.Activity.loginActivity" android:launchMode="singleTask"></activity>
     </application>
 
 </manifest>
