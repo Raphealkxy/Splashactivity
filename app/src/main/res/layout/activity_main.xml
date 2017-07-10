@@ -8,7 +8,22 @@
     tools:context="com.example.timmy.splashactivity.Activity.Activity.MainActivity">
 
 <!--标题栏-->
+    <LinearLayout
+        android:background="#2679ca"
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="46dp">
+        <TextView
 
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="23dp"
+            android:textColor="@android:color/white"
+            android:id="@+id/Tab_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <!--@android:color/holo_blue_bright-->
+    </LinearLayout>
 
    <!-- framelayout-->
     <FrameLayout
@@ -30,29 +45,29 @@
         android:layout_height="wrap_content">
 
         <RadioButton
-        android:drawableTop="@drawable/rb_firstpage_drawable_selector"
+            style="@style/bottom_tag_style"
+            android:drawableTop="@drawable/rb_firstpage_drawable_selector"
         android:text="首页"
         android:id="@+id/rb_firstPage"
-        style="@style/bottom_tag_style"
         />
 
         <RadioButton
             android:drawableTop="@drawable/rb_secondpage_drawable_selector"
-            android:text="第二"
+            android:text="更多"
             android:id="@+id/rb_secondPage"
             style="@style/bottom_tag_style"
             />
 
         <RadioButton
             android:drawableTop="@drawable/rb_thirdpage_drawable_selector"
-            android:text="第三"
+            android:text="点名"
             android:id="@+id/rb_thirthPage"
             style="@style/bottom_tag_style"
             />
 
         <RadioButton
             android:drawableTop="@drawable/rb_forthpage_drawable_selector"
-            android:text="第四"
+            android:text="用户"
             android:id="@+id/rb_forthPage"
             style="@style/bottom_tag_style"
             />

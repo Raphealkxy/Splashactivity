@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.example.timmy.splashactivity.Activity.Activity.Pager.firstpager;
 import com.example.timmy.splashactivity.Activity.Activity.Pager.forthpager;
@@ -30,12 +31,14 @@ public class MainActivity extends FragmentActivity {
     private ArrayList<BasePager> basePagers;
     private RadioGroup radioGroup;
     private int positon;
+    private TextView textView_tab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        textView_tab= (TextView) findViewById(R.id.Tab_text);
         radioGroup = (RadioGroup) findViewById(R.id.rg_bottom_tag);
         basePagers = new ArrayList<>();
         basePagers.add(new firstpager(this));
@@ -59,15 +62,19 @@ public class MainActivity extends FragmentActivity {
             switch (checkedId) {
                 default:
                     positon = 0;
+                    textView_tab.setText("首页");
                     break;
                 case R.id.rb_secondPage:
                     positon = 1;
+                    textView_tab.setText("更多");
                     break;
                 case R.id.rb_thirthPage:
                     positon = 2;
+                    textView_tab.setText("点名");
                     break;
                 case R.id.rb_forthPage:
                     positon = 3;
+                    textView_tab.setText("用户");
                     break;
 
             }
