@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.example.timmy.splashactivity.Activity.Activity.base.BasePager;
 import com.example.timmy.splashactivity.Activity.Activity.utils.LogUtil;
+import com.example.timmy.splashactivity.R;
 
 /**
  * Created by Timmy on 2017/7/9.
@@ -19,17 +20,14 @@ public class thirdpager extends BasePager {
     public thirdpager(Context content) {
         super(content);
     }
-
+private View view;
     @Override
     public View initVeiw() {
         LogUtil.e("第三页已经被初始化了");
-        textView=new TextView(context);
-        textView.setTextSize(25);
-        textView.setGravity(Gravity.CENTER);
-        textView.setTextColor(Color.RED);
+      view=View.inflate(context, R.layout.thirdfragment,null);
 
 
-        return textView;
+        return view;
     }
 
     @Override
@@ -37,7 +35,6 @@ public class thirdpager extends BasePager {
         super.initdata();
         LogUtil.e("第三页的数据被初始化了");
 
-        textView.setText("你好，这是第三页");
 
     }
 }
