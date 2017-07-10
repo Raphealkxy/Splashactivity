@@ -17,7 +17,8 @@
         </activity>
         <activity
             android:name=".Activity.Activity.MainActivity"
-            android:launchMode="singleTask">
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            >
 
             <!-- 当前activity自启动一次 -->
         </activity>
