@@ -13,13 +13,13 @@
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="46dp">
-        <TextView
 
+        <TextView
+            android:id="@+id/Tab_text_1"
             android:gravity="center"
             android:layout_gravity="center"
             android:textSize="23dp"
             android:textColor="@android:color/white"
-            android:id="@+id/Tab_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <!--@android:color/holo_blue_bright-->

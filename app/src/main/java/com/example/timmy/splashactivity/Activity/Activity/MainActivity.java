@@ -38,7 +38,8 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textView_tab= (TextView) findViewById(R.id.Tab_text);
+    //    textView_tab= (TextView) findViewById(R.id.Tab_text_1);
+        textView_tab= (TextView) findViewById(R.id.Tab_text_1);
         radioGroup = (RadioGroup) findViewById(R.id.rg_bottom_tag);
         basePagers = new ArrayList<>();
         basePagers.add(new firstpager(this));

@@ -2,46 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:background="#ededed"
+    android:padding="15dp"
     android:layout_height="match_parent">
 
-    <ImageButton
-        android:id="@+id/btn_dianming"
-        android:layout_margin="10dp"
-        android:layout_width="64sp"
-        android:layout_height="64sp"
-        android:src="@drawable/dianming_64px"
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         />
-
-    <ImageButton
-        android:id="@+id/btn_zhuche"
-        android:layout_toRightOf="@+id/btn_dianming"
-        android:layout_margin="10dp"
-        android:layout_width="64sp"
-        android:layout_height="64sp"
-        android:src="@drawable/dianming_64px"
-
-        />
-    <ImageButton
-        android:layout_toRightOf="@+id/btn_zhuche"
-        android:id="@+id/btn_chaxun"
-        android:layout_margin="10dp"
-        android:layout_width="64sp"
-        android:layout_height="64sp"
-        android:src="@drawable/dianming_64px"
-
-        />
-
-    <ImageButton
-        android:layout_toRightOf="@+id/btn_chaxun"
-        android:id="@+id/btn_sanchu"
-        android:layout_margin="10dp"
-        android:layout_width="64sp"
-        android:layout_height="64sp"
-        android:src="@drawable/dianming_64px"
-
-        />
-
 
 
 
