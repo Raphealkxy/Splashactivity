@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_third_check"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.timmy.splashactivity.Activity.Activity.Isv.third_check">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#2679ca"
+        android:id="@+id/relativeLayout">
+        <ImageButton
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/check_button_backward"
+            android:layout_width="10dp"
+            android:layout_height="20dp"
+            android:background="@drawable/back_arrow"
+
+            />
+        <TextView
+            android:id="@+id/check_text_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="marquee"
+            android:gravity="center_horizontal|center"
+            android:singleLine="true"
+            android:text="验证"
+            android:textColor="#ffffffff"
+            android:textSize="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
+
+
+
+
+
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/relativeLayout"
+        android:id="@+id/username_res"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="用户名："
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/user_input_rec_check"
+            android:hint="字母数字组合"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/username_res"
+        android:id="@+id/username_res_layout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="密   码："
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/editText_recpass_check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/res_btn_group"
+        android:layout_below="@+id/username_res_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <Button
+            android:textSize="20dp"
+            android:id="@+id/btn_check"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="验证"
+            android:layout_marginLeft="40dp"
+
+            />
+        <Button
+            android:textSize="20dp"
+            android:id="@+id/passrec_btn_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="获取密码"
+            android:layout_marginLeft="50dp"
+
+            />
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_below="@+id/res_btn_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/showDuPaw"
+            android:textSize="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/showsyjb"
+            android:textSize="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/mShowRegFbkTextView"
+            android:textSize="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+
+    </LinearLayout>
+</RelativeLayout>

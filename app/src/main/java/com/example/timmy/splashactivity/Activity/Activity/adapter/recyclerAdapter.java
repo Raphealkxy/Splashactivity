@@ -42,6 +42,20 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
 
     }
 
+    //设置点击图片
+//设置点击某个 item 的监听
+    public interface OnImageViewClickListener{
+        void onImageViewClick(View view,int position);
+    }
+    private OnImageViewClickListener onImageViewClickListener;
+    /**
+     * 设置监听图片
+     * @param onImageViewClickListener
+     */
+    public void setOnImageViewClickListener(OnImageViewClickListener onImageViewClickListener) {
+        this.onImageViewClickListener = onImageViewClickListener;
+    }
+
 
     //得到总条数
     @Override
@@ -58,6 +72,29 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
             iv_icon= (ImageView) itemView.findViewById(R.id.iv_icon);
             tv_title= (TextView) itemView.findViewById(R.id.text_title);
 
+            //设置监听
+            iv_icon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onImageViewClickListener != null){
+                        onImageViewClickListener.onImageViewClick(v,getLayoutPosition());
+                    }
+                }
+            });
+
+
+
+                    }
         }
+
+
     }
-}
+
+
+
+
+
+
+
+
+

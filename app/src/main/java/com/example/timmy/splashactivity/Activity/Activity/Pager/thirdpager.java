@@ -1,15 +1,20 @@
 package com.example.timmy.splashactivity.Activity.Activity.Pager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.timmy.splashactivity.Activity.Activity.Isv.third_check;
+import com.example.timmy.splashactivity.Activity.Activity.Isv.third_register;
 import com.example.timmy.splashactivity.Activity.Activity.adapter.recyclerAdapter;
 import com.example.timmy.splashactivity.Activity.Activity.base.BasePager;
+import com.example.timmy.splashactivity.Activity.Activity.face.faceDemo;
 import com.example.timmy.splashactivity.Activity.Activity.utils.LogUtil;
 import com.example.timmy.splashactivity.R;
 
@@ -42,7 +47,7 @@ private View view;
     public void initdata() {
         super.initdata();
         LogUtil.e("第三页的数据被初始化了");
-        datas_str=new String[]{"注册","点名","删除模型","查询模型"};
+        datas_str=new String[]{"注册","点名","人脸识别","查询模型"};
        datas = new ArrayList<>();
         for(int i=0;i<datas_str.length;i++)
             datas.add(datas_str[i]);
@@ -57,6 +62,37 @@ private View view;
 
         //设置LayoutManger
         recyclerview.setLayoutManager(new GridLayoutManager(context,4,GridLayoutManager.VERTICAL,false));
+        myrecyclerview.setOnImageViewClickListener(new recyclerAdapter.OnImageViewClickListener() {
+            @Override
+            public void onImageViewClick(View view, int position) {
+                Intent intent;
+                switch (position)
+                {
+                    case 0:
+                        intent=new Intent(context,third_register.class);
+                        context.startActivity(intent);
+                        break;
+
+                    case 1:
+                        intent=new Intent(context,third_check.class);
+                        context.startActivity(intent);
+                        break;
+                    case 2:
+                        intent=new Intent(context,faceDemo.class);
+                        context.startActivity(intent);
+                    default:
+                        break;
+
+
+
+                }
+
+
+
+            }
+
+
+        });
 
     }
 }

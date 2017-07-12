@@ -1,14 +1,20 @@
 package com.example.timmy.splashactivity.Activity.Activity.Pager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.timmy.splashactivity.Activity.Activity.adapter.forthPagerAdapter;
 import com.example.timmy.splashactivity.Activity.Activity.base.BasePager;
+import com.example.timmy.splashactivity.Activity.Activity.forthpage.TitleActivity;
 import com.example.timmy.splashactivity.Activity.Activity.utils.LogUtil;
 import com.example.timmy.splashactivity.R;
+
+import static android.R.attr.data;
 
 /**
  * Created by Timmy on 2017/7/9.
@@ -32,6 +38,18 @@ public class forthpager extends BasePager {
        view=View.inflate(context, R.layout.forth_fragment,null);
         listView= (ListView) view.findViewById(R.id.forth_listview);
         listViewtwo= (ListView) view.findViewById(R.id.forth_listview_2);
+        listViewtwo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(position==2) {
+                    Intent intent = new Intent(context, TitleActivity.class);
+                    context.startActivity(intent);
+                }else {
+                    String data=datas_2[position];
+                    Toast.makeText(context, data, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         return view;
     }
 
