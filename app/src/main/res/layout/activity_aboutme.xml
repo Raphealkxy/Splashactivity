@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_aboutme"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.timmy.splashactivity.Activity.Activity.aboutme.aboutme">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#2679ca"
+        android:id="@+id/relativeLayout">
+
+        <ImageButton
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/button_backward"
+            android:layout_width="10dp"
+            android:layout_height="20dp"
+            android:background="@drawable/back_arrow"
+
+            />
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="marquee"
+            android:gravity="center_horizontal|center"
+            android:singleLine="true"
+            android:text="个人资料"
+            android:textColor="#ffffffff"
+            android:textSize="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
+<RelativeLayout
+    android:layout_below="@+id/relativeLayout"
+    android:id="@+id/imagewrapper"
+    android:layout_gravity="center"
+    android:layout_marginBottom="17dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/app8"
+        android:scaleType="fitXY"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
+    <com.example.timmy.splashactivity.Activity.Activity.aboutme.CircleImageView
+        android:id="@+id/iv_pers_portrait"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/app9"
+        app:border_color="#ff0"
+        app:border_width="7dp"
+        android:layout_marginTop="12dp"
+        android:layout_centerHorizontal="true" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:text="孔祥月"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_below="@+id/iv_pers_portrait"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp" />
+
+
+</RelativeLayout>
+
+
+    <View
+        android:layout_below="@+id/imagewrapper"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:background="#cacaca"
+        android:id="@+id/view" />
+    <LinearLayout
+        android:id="@+id/num"
+        android:gravity="center"
+        android:layout_below="@+id/view"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/num_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="学号："
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/num_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 15416118"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </LinearLayout>
+    <View
+        android:layout_width="500dp"
+        android:layout_below="@+id/num"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:background="#cacaca"
+        android:id="@+id/view1" />
+    <LinearLayout
+        android:id="@+id/depart"
+        android:gravity="center"
+        android:layout_below="@+id/view1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/depart_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="部门/院系："
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/depart_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="信息数理学院"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_below="@id/depart"
+        android:layout_width="500dp"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:background="#cacaca"
+        android:id="@+id/view2" />
+    <LinearLayout
+        android:id="@+id/tel"
+        android:gravity="center"
+        android:layout_below="@+id/view2"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/tel_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="电话："
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/tel_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="18262991570"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </LinearLayout>
+    <View
+        android:layout_below="@+id/tel"
+        android:layout_width="500dp"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:background="#cacaca"
+        android:id="@+id/view3" />
+    <LinearLayout
+        android:id="@+id/email"
+        android:gravity="center"
+        android:layout_below="@+id/view3"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/email_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="邮箱："
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/email_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15416118@small.cczu.edu.cn"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </LinearLayout>
+    <View
+        android:layout_below="@+id/email"
+        android:layout_width="500dp"
+        android:layout_height="1dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:background="#cacaca"
+        android:id="@+id/view4" />
+</RelativeLayout>

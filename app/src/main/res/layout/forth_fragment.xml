@@ -30,6 +30,7 @@
     </ListView>
 
     <Button
+        android:id="@+id/logout"
         android:layout_marginTop="30dp"
         android:layout_below="@+id/forth_listview_2"
         android:background="#2679ca"

@@ -54,6 +54,10 @@
         </activity>
 
         <activity android:name=".Activity.Activity.forthpage.TitleActivity"></activity>
+        <activity android:name=".Activity.Activity.aboutme.aboutme">
+
+        </activity>
+
 
         <activity android:name=".Activity.Activity.Isv.third_register" />
         <activity android:name=".Activity.Activity.Isv.third_check" />
