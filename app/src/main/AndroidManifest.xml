@@ -64,6 +64,16 @@
 
         <activity android:name=".Activity.Activity.face.faceDemo"/>
 
+        <activity android:name=".Activity.Activity.register.registerSuccess" />
+        <activity android:name=".Activity.Activity.register.loginSuccess" />
+        <activity android:name=".Activity.Activity.register.registerFace">
+
+        </activity>
+        <activity android:name=".Activity.Activity.register.register" />
+
+        <activity android:name=".Activity.Activity.register.registerFace2" />
+        <activity android:name=".Activity.Activity.register.registerFace3"></activity>
+
     </application>
 
 
