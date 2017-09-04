@@ -33,7 +33,7 @@ public class register extends Activity implements View.OnClickListener {
     private TextView sex;
     private Button submit;
     private Button reset;
-    private String mBaseUrl = "http://192.168.1.109:8080/AMS/getdata";
+    private String mBaseUrl = "http://192.168.253.1:8080/AMS/getdata";
     private String origin=register.class.getName();
 
     @Override

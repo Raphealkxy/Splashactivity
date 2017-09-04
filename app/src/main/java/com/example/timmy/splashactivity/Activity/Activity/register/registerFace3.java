@@ -45,7 +45,7 @@ public class registerFace3 extends Activity implements View.OnClickListener {
     private byte[] mImageData = null;
     private File mPictureFile;
     private  TextView textView;
-    private String mBaseUrl="http://192.168.1.109:8080/AMS/fileupload";
+    private String mBaseUrl="http://192.168.253.1:8080/AMS/fileupload";
     private String username="";
     private String ID="";
     @Override

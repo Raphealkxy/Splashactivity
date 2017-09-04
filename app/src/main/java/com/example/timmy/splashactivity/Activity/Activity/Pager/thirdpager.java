@@ -15,6 +15,8 @@ import com.example.timmy.splashactivity.Activity.Activity.Isv.third_register;
 import com.example.timmy.splashactivity.Activity.Activity.adapter.recyclerAdapter;
 import com.example.timmy.splashactivity.Activity.Activity.base.BasePager;
 import com.example.timmy.splashactivity.Activity.Activity.face.faceDemo;
+import com.example.timmy.splashactivity.Activity.Activity.getDatafromDb.getDataFromDb;
+import com.example.timmy.splashactivity.Activity.Activity.getDatafromDb.requestUserData;
 import com.example.timmy.splashactivity.Activity.Activity.utils.LogUtil;
 import com.example.timmy.splashactivity.R;
 
@@ -47,7 +49,7 @@ private View view;
     public void initdata() {
         super.initdata();
         LogUtil.e("第三页的数据被初始化了");
-        datas_str=new String[]{"注册","点名","人脸识别","查询模型"};
+        datas_str=new String[]{"获取表单","点名","人脸识别","查询模型"};
        datas = new ArrayList<>();
         for(int i=0;i<datas_str.length;i++)
             datas.add(datas_str[i]);
@@ -69,7 +71,7 @@ private View view;
                 switch (position)
                 {
                     case 0:
-                        intent=new Intent(context,third_register.class);
+                        intent=new Intent(context,requestUserData.class);
                         context.startActivity(intent);
                         break;
 

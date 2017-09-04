@@ -30,7 +30,7 @@ public class login extends Activity  implements View.OnClickListener{
     private TextView username;
     private TextView password;
     private TextView textView;
-    private String mBaseUrl = "http://192.168.1.109:8080/AMS/CheckLogin";
+    private String mBaseUrl = "http://192.168.253.1:8080/AMS/CheckLogin";
 
 
     @Override
