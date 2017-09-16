@@ -1,4 +1,4 @@
-package com.example.timmy.splashactivity.Activity.Activity.register;
+package com.example.timmy.splashactivity.Activity.Activity.utils;
 
 public class User {
 

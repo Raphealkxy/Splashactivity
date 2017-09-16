@@ -1,19 +1,24 @@
-package com.example.timmy.splashactivity.Activity.Activity.register;
+package com.example.timmy.splashactivity.Activity.Activity.login;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.timmy.splashactivity.Activity.Activity.register.register;
+import com.example.timmy.splashactivity.Activity.Activity.utils.LoginUser;
 import com.example.timmy.splashactivity.R;
 import com.google.gson.Gson;
-import com.lzy.okhttputils.OkHttpUtils;
-import com.lzy.okhttputils.callback.StringCallback;
 
+
+import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.Event;
+import org.xutils.x;
 
 import okhttp3.Call;
 import okhttp3.MediaType;
@@ -21,65 +26,51 @@ import okhttp3.Request;
 
 import static android.content.ContentValues.TAG;
 
-public class login extends Activity  implements View.OnClickListener{
+
+@ContentView(R.layout.activity_login_modified)
+public class login extends Activity{
 
 
 
-    private Button resbtn;
-    private Button login;
+
     private TextView username;
     private TextView password;
     private TextView textView;
-    private String mBaseUrl = "http://192.168.253.1:8080/AMS/CheckLogin";
+    private String BaseUrl="";
+    private String mBaseUrl = "";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        x.view().inject(this);
+        //透明状态栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        //透明导航栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        BaseUrl=this.getString(R.string.app_name);
+        mBaseUrl = BaseUrl+"CheckLogin";
         init();
     }
 
     private void init() {
-        resbtn= (Button) findViewById(R.id.register_user);
-        login= (Button) findViewById(R.id.login);
+
         username= (TextView) findViewById(R.id.username);
         password= (TextView) findViewById(R.id.password);
-       resbtn.setOnClickListener(this);
-       login.setOnClickListener(this);
         textView= (TextView) findViewById(R.id.login_showmesg);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch(v.getId())
-        {
-            case R.id.register_user:
-             direct();
-                break;
-            case R.id.login:
-                submit();
-                break;
-            default:
-                break;
 
-
-
-
-
-
-        }
-    }
-
-    private void direct() {
+    @Event(value = R.id.register_user)
+    private void direct(View view) {
         Intent intent=new Intent(this,register.class);
         startActivity(intent);
 
 
         finish();
     }
-
-    private void submit() {
+@Event(value = R.id.login)
+    private void submit(View view) {
         Toast.makeText(login.this, "hahah", Toast.LENGTH_SHORT).show();
 
         postString(username.getText()+"",password.getText()+"");

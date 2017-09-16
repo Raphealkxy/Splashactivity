@@ -10,19 +10,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.timmy.splashactivity.R;
-import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.Event;
+import org.xutils.x;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import okhttp3.Call;
-import okhttp3.MediaType;
 import okhttp3.Request;
 
 import static android.content.ContentValues.TAG;
 
-public class requestUserData extends Activity implements View.OnClickListener {
+@ContentView(R.layout.activity_request_user_data)
+public class requestUserData extends Activity {
 
 
-    private Button btn;
     private TextView textView;
     private Toast mToast;
     private String content;
@@ -30,38 +35,55 @@ public class requestUserData extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_request_user_data);
-        btn= (Button) findViewById(R.id.btn);
+        x.view().inject(this);
         textView= (TextView) findViewById(R.id.showmesg);
         mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
 
-        btn.setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch(v.getId())
-        {
-            case R.id.btn:
-               postString();
-                break;
-            default:
-                break;
-        }
-    }
-    public void postString()
+
+@Event(value=R.id.btn)
+    public void getdata(View view)
     {
-        String mBaseUrl="http://192.168.253.1:8080/AMS/getuserlist";
-        String url = mBaseUrl;
-        OkHttpUtils
-                .postString()
-                .url(url)
-                .mediaType(MediaType.parse("application/json; charset=utf-8"))
-                .content("")
-                .build()
-                .execute(new MyStringCallback());
 
+//    File file = new File(uri);
+//    if (!file.exists())
+//    {
+//        Toast.makeText(registerFace.this, "文件不存在，请修改文件路径", Toast.LENGTH_SHORT).show();
+//        return;
+//    }
+        Map<String, String> params = new HashMap<>();
+       // params.put("password", password);
+       params.put("username","kxy");
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("APP-Key", "APP-Secret222");
+        headers.put("APP-Secret", "APP-Secret111");
+
+
+        String url = "http://192.168.253.1:8080/AMSFull/action_getuserlist";
+
+        com.zhy.http.okhttp.OkHttpUtils.post()//
+                //.addFile()//
+                .url(url)//
+                .params(params)//
+                .headers(headers)//
+                .build()//
+                .execute(new requestUserData.MyStringCallback());
     }
+//    public void postString()
+//    {
+//        String mBaseUrl="http://192.168.253.1:8080/AMSFull/action_getuserlist";
+//        String url = mBaseUrl;
+//        OkHttpUtils
+//                .postString()
+//                .url(url)
+//                .mediaType(MediaType.parse("application/json; charset=utf-8"))
+//                .content("")
+//                .build()
+//                .execute(new MyStringCallback());
+//
+//    }
     public class MyStringCallback extends StringCallback
     {
         @Override

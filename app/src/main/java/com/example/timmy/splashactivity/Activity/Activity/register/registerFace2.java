@@ -12,16 +12,22 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.timmy.splashactivity.Activity.Activity.utils.Code;
 import com.example.timmy.splashactivity.Activity.Activity.utils.FaceUtil;
 import com.example.timmy.splashactivity.R;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.Event;
+import org.xutils.x;
 
 import java.io.File;
 import java.util.HashMap;
@@ -32,11 +38,10 @@ import okhttp3.Request;
 
 import static android.content.ContentValues.TAG;
 
-public class registerFace2 extends Activity implements View.OnClickListener{
+@ContentView(R.layout.activity_register_face2)
+public class registerFace2 extends Activity{
 
-    private Button take_photo;
-    private Button getImage;
-    private Button submit;
+
     private TextView tip;
     private ImageView imageView;
     private Toast mToast;
@@ -45,54 +50,40 @@ public class registerFace2 extends Activity implements View.OnClickListener{
     private final int REQUEST_CAMERA_IMAGE = 2;//拍照请求码
     private byte[] mImageData = null;
     private File mPictureFile;
-    private  TextView textView;
-    private String mBaseUrl="http://192.168.253.1:8080/AMS/fileupload";
+    private String BaseUrl="";
+    private String mBaseUrl = "";
     private String username="";
     private String ID="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_face2);
+        x.view().inject(this);
+        //透明状态栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        //透明导航栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        BaseUrl=this.getResources().getString(R.string.BaseUrl);
+        mBaseUrl = BaseUrl+"action_upload";
         init();
 
     }
 
     private void init() {
-        take_photo= (Button) findViewById(R.id.take_photo2);
-        getImage= (Button) findViewById(R.id.btn_getImage2);
-        submit= (Button) findViewById(R.id.btn_register2);
+
         tip= (TextView) findViewById(R.id.tip2);
         imageView= (ImageView) findViewById(R.id.image_pic2);
-    //    textView= (TextView) findViewById(R.id.textview2);
-        take_photo.setOnClickListener(this);
-        getImage.setOnClickListener(this);
-        submit.setOnClickListener(this);
+       // submit.setOnClickListener(this);
         mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
         Intent intent = getIntent();
         ID=intent.getStringExtra("Id");
         username=intent.getStringExtra("username");
-        //showTip();
 
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId())
-        {
-            case R.id.btn_getImage2:
-                getImage();
-                break;
-            case R.id.take_photo2:
-                take_photo();
-                break;
-            case R.id.btn_register2:
-                break;
-            default:
-                break;
 
-        }
-    }
-    private void take_photo() {
+
+    @Event(value=R.id.take_photo2)
+    private void take_photo(View view) {
         // 设置相机拍照后照片保存路径
         mPictureFile = new File(Environment.getExternalStorageDirectory(),
                 "picture" + System.currentTimeMillis()/1000 + ".jpg");
@@ -103,7 +94,9 @@ public class registerFace2 extends Activity implements View.OnClickListener{
         mIntent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
         startActivityForResult(mIntent, REQUEST_CAMERA_IMAGE);
     }
-    private void getImage() {
+
+    @Event(value = R.id.btn_getImage2)
+    private void getImage(View view) {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_PICK);
@@ -157,32 +150,13 @@ public class registerFace2 extends Activity implements View.OnClickListener{
             options.inJustDecodeBounds = false;
             mImage = BitmapFactory.decodeFile(fileSrc, options);
 
-            // 压缩图片
-//            options.inSampleSize = Math.max(1, (int) Math.ceil(Math.max(
-//                    (double) options.outWidth / 1024f,
-//                    (double) options.outHeight / 1024f)));
-//            options.inJustDecodeBounds = false;
-            //       mImage = BitmapFactory.decodeFile(fileSrc, options);
 
-
-            // 若mImageBitmap为空则图片信息不能正常获取
             if(null == mImage) {
                 showTip("图片信息无法正常获取！");
                 return;
             }
 
-            // 部分手机会对图片做旋转，这里检测旋转角度
-            //  int degree = FaceUtil.readPictureDegree(fileSrc);
-            //    if (degree != 0) {
-            // 把图片旋转为正的方向
-            //       mImage = FaceUtil.rotateImage(degree, mImage);
-            //    }
 
-            //  ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-            //可根据流量及网络状况对图片进行压缩
-            // mImage.compress(Bitmap.CompressFormat.JPEG, 80, baos);
-            //   mImageData = baos.toByteArray();
             uploadFile(fileSrc,ID,username);
             imageView.setImageBitmap(mImage);
         }
@@ -231,7 +205,7 @@ public class registerFace2 extends Activity implements View.OnClickListener{
         String url = mBaseUrl;
 
         OkHttpUtils.post()//
-                .addFile("mFile", ID+"_02"+".png", file)//
+                .addFile("upload", ID+"_02"+".png", file)//
                 .url(url)//
                 .params(params)//
                 .headers(headers)//

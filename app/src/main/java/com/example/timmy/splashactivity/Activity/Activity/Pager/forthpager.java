@@ -13,11 +13,9 @@ import com.example.timmy.splashactivity.Activity.Activity.aboutme.aboutme;
 import com.example.timmy.splashactivity.Activity.Activity.adapter.forthPagerAdapter;
 import com.example.timmy.splashactivity.Activity.Activity.base.BasePager;
 import com.example.timmy.splashactivity.Activity.Activity.forthpage.TitleActivity;
-import com.example.timmy.splashactivity.Activity.Activity.loginActivity;
+import com.example.timmy.splashactivity.Activity.Activity.login.loginActivity;
 import com.example.timmy.splashactivity.Activity.Activity.utils.LogUtil;
 import com.example.timmy.splashactivity.R;
-
-import static android.R.attr.data;
 
 /**
  * Created by Timmy on 2017/7/9.

@@ -6,9 +6,15 @@ import android.os.Handler;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.WindowManager;
 
+import com.example.timmy.splashactivity.Activity.Activity.login.loginActivity;
 import com.example.timmy.splashactivity.R;
 
+import org.xutils.view.annotation.ContentView;
+import org.xutils.x;
+
+@ContentView(R.layout.splash_activity)
 public class SplashActivity extends Activity {
 
 
@@ -18,8 +24,12 @@ public class SplashActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash_activity);
+        x.view().inject(this);
         //让界面延迟执行，注意线程是本线程，不是新开辟的线程
+        //透明状态栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        //透明导航栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {

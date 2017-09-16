@@ -12,17 +12,21 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.timmy.splashactivity.Activity.Activity.utils.Code;
 import com.example.timmy.splashactivity.Activity.Activity.utils.FaceUtil;
 import com.example.timmy.splashactivity.R;
 import com.google.gson.Gson;
-import com.lzy.okhttputils.OkHttpUtils;
-import com.lzy.okhttputils.callback.StringCallback;
 
+
+import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.Event;
+import org.xutils.x;
 
 import java.io.File;
 import java.util.HashMap;
@@ -33,11 +37,9 @@ import okhttp3.Request;
 
 import static android.content.ContentValues.TAG;
 
-public class registerFace extends Activity  implements View.OnClickListener{
+@ContentView(R.layout.activity_register_face)
+public class registerFace extends Activity{
 
-    private Button take_photo;
-    private Button getImage;
-    private Button submit;
     private TextView tip;
     private ImageView imageView;
     private Toast mToast;
@@ -47,27 +49,28 @@ public class registerFace extends Activity  implements View.OnClickListener{
     private byte[] mImageData = null;
     private File mPictureFile;
     private  TextView textView;
-    private String mBaseUrl="http://192.168.253.1:8080/AMS/fileupload";
+    private String BaseUrl="";
+    private String mBaseUrl = "";
     private String username="";
     private String ID="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_face);
+        x.view().inject(this);
+        //透明状态栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        //透明导航栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        BaseUrl=this.getResources().getString(R.string.BaseUrl);
+        mBaseUrl = BaseUrl+"action_upload";
         init();
 
     }
 
     private void init() {
-        take_photo= (Button) findViewById(R.id.take_photo);
-        getImage= (Button) findViewById(R.id.btn_getImage);
-        submit= (Button) findViewById(R.id.btn_register);
         tip= (TextView) findViewById(R.id.tip);
         imageView= (ImageView) findViewById(R.id.image_pic);
         textView= (TextView) findViewById(R.id.textview);
-        take_photo.setOnClickListener(this);
-        getImage.setOnClickListener(this);
-        submit.setOnClickListener(this);
         mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
         Intent intent = getIntent();
         ID=intent.getStringExtra("id");
@@ -76,24 +79,9 @@ public class registerFace extends Activity  implements View.OnClickListener{
        // showTip(username);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId())
-        {
-            case R.id.btn_getImage:
-                getImage();
-                break;
-            case R.id.take_photo:
-                take_photo();
-                break;
-            case R.id.btn_register:
-                break;
-            default:
-                break;
 
-        }
-    }
-    private void take_photo() {
+    @Event(R.id.take_photo)
+    private void take_photo(View view) {
         // 设置相机拍照后照片保存路径
         mPictureFile = new File(Environment.getExternalStorageDirectory(),
                 "picture" + System.currentTimeMillis()/1000 + ".jpg");
@@ -104,7 +92,9 @@ public class registerFace extends Activity  implements View.OnClickListener{
         mIntent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
         startActivityForResult(mIntent, REQUEST_CAMERA_IMAGE);
     }
-    private void getImage() {
+
+    @Event(value = R.id.btn_getImage)
+    private void getImage(View view) {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_PICK);
@@ -184,7 +174,8 @@ public class registerFace extends Activity  implements View.OnClickListener{
             //可根据流量及网络状况对图片进行压缩
            // mImage.compress(Bitmap.CompressFormat.JPEG, 80, baos);
          //   mImageData = baos.toByteArray();
-           uploadFile(fileSrc,ID,username);
+         //  uploadFile(fileSrc,ID,username);
+            multiFileUpload(fileSrc,ID,username);
             imageView.setImageBitmap(mImage);
         }
 
@@ -211,33 +202,57 @@ public class registerFace extends Activity  implements View.OnClickListener{
                 });
     }
 
-    public void uploadFile(String uri,String ID,String username)
-    {
+//    public void uploadFile(String uri,String ID,String username)
+//    {
+//
+//        File file = new File(uri);
+//        if (!file.exists())
+//        {
+//            Toast.makeText(registerFace.this, "文件不存在，请修改文件路径", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//        Map<String, String> params = new HashMap<>();
+//        params.put("ID", ID);
+//        params.put("username",username);
+//
+//        Map<String, String> headers = new HashMap<>();
+//        headers.put("APP-Key", "APP-Secret222");
+//        headers.put("APP-Secret", "APP-Secret111");
+//
+//
+//        String url = mBaseUrl;
+//
+//        com.zhy.http.okhttp.OkHttpUtils.post()//
+//                .addFile("upload", ID+"_01"+".png", file)//
+//                .url(url)//
+//                .params(params)//
+//                .headers(headers)//
+//                .build()//
+//                .execute(new registerFace.MyStringCallback());
+//    }
 
-        File file = new File(uri);
+    public void multiFileUpload(String uri,String ID,String username)
+    {
+        File file = new File( uri);
+      //  File file2 = new File(Environment.getExternalStorageDirectory(), "test1#.txt");
         if (!file.exists())
         {
             Toast.makeText(registerFace.this, "文件不存在，请修改文件路径", Toast.LENGTH_SHORT).show();
             return;
         }
         Map<String, String> params = new HashMap<>();
-        params.put("ID", ID);
+                params.put("ID", ID);
         params.put("username",username);
 
-        Map<String, String> headers = new HashMap<>();
-        headers.put("APP-Key", "APP-Secret222");
-        headers.put("APP-Secret", "APP-Secret111");
-
-
         String url = mBaseUrl;
-
         com.zhy.http.okhttp.OkHttpUtils.post()//
-                .addFile("mFile", ID+"_01"+".png", file)//
-                .url(url)//
+                .addFile("upload", ID+"_01"+".png", file)
+               // .addFile("mFile", "messenger_01.png", file)//
+              //  .addFile("mFile", "test1.txt", file2)//
+                .url(url)
                 .params(params)//
-                .headers(headers)//
                 .build()//
-                .execute(new registerFace.MyStringCallback());
+                .execute(new MyStringCallback());
     }
 
     public class MyStringCallback extends com.zhy.http.okhttp.callback.StringCallback

@@ -49,7 +49,7 @@
             <!-- 当前activity自启动一次 -->
         </activity>
         <activity
-            android:name=".Activity.Activity.loginActivity"
+            android:name=".Activity.Activity.login.loginActivity"
             android:launchMode="singleTask"></activity>
         <activity android:name=".Activity.Activity.forthpage.TitleActivity" />
         <activity android:name=".Activity.Activity.aboutme.aboutme"></activity>
@@ -57,7 +57,7 @@
         <activity android:name=".Activity.Activity.Isv.third_check" />
         <activity android:name=".Activity.Activity.face.faceDemo" />
         <activity android:name=".Activity.Activity.register.registerSuccess" />
-        <activity android:name=".Activity.Activity.register.loginSuccess" />
+        <activity android:name=".Activity.Activity.login.loginSuccess" />
         <activity android:name=".Activity.Activity.register.registerFace"></activity>
         <activity android:name=".Activity.Activity.register.register" />
         <activity android:name=".Activity.Activity.register.registerFace2" />

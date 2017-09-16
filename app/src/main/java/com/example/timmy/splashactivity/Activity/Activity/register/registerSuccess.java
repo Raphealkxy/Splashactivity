@@ -4,11 +4,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 
-import com.example.timmy.splashactivity.Activity.Activity.loginActivity;
+import com.example.timmy.splashactivity.Activity.Activity.login.loginActivity;
 import com.example.timmy.splashactivity.R;
 
+import org.xutils.view.annotation.ContentView;
+import org.xutils.x;
+
+@ContentView(R.layout.activity_register_success)
 public class registerSuccess extends Activity implements View.OnClickListener {
 
 
@@ -16,7 +21,11 @@ public class registerSuccess extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_success);
+        x.view().inject(this);
+        //透明状态栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        //透明导航栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         init();
     }
 

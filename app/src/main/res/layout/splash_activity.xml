@@ -2,21 +2,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
-    android:background="@android:color/white"
+    android:background="@drawable/splash"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
   
     tools:context="com.example.timmy.splashactivity.Activity.Activity.SplashActivity">
 
-    <ImageView
-        android:id="@+id/imgae_load"
-        android:layout_centerInParent="true"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:src="@drawable/splashlight"
-         />
+    <!--<ImageView-->
+        <!--android:id="@+id/imgae_load"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:layout_width="140dp"-->
+        <!--android:layout_height="140dp"-->
+        <!--android:src="@drawable/splashlight"-->
+         <!--/>-->
+    <!--android:layout_below="@id/imgae_load"-->
+
     <LinearLayout
-        android:layout_below="@id/imgae_load"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
@@ -27,6 +29,7 @@
             android:layout_height="30dp" />
         <TextView
             android:layout_marginLeft="8dp"
+            android:textColor="@android:color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="正在启动..."

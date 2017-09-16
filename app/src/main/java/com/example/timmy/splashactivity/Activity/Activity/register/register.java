@@ -5,15 +5,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.timmy.splashactivity.Activity.Activity.getDatafromDb.requestUserData;
 import com.example.timmy.splashactivity.R;
 import com.google.gson.Gson;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 
+
+import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.Event;
+import org.xutils.x;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.MediaType;
@@ -21,8 +30,8 @@ import okhttp3.Request;
 
 import static android.content.ContentValues.TAG;
 
-
-public class register extends Activity implements View.OnClickListener {
+@ContentView(R.layout.activity_register)
+public class register extends Activity {
 
     private TextView id;
     private TextView textView;
@@ -31,15 +40,21 @@ public class register extends Activity implements View.OnClickListener {
     private TextView telephone;
     private TextView email;
     private TextView sex;
-    private Button submit;
-    private Button reset;
-    private String mBaseUrl = "http://192.168.253.1:8080/AMS/getdata";
+   private String BaseUrl="";
+    private String mBaseUrl = "";
+
     private String origin=register.class.getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        x.view().inject(this);
+        //透明状态栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        //透明导航栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+         BaseUrl=this.getResources().getString(R.string.BaseUrl);
+        mBaseUrl = BaseUrl+"action_getdata";
         initUI();
 
     }
@@ -52,43 +67,50 @@ public class register extends Activity implements View.OnClickListener {
         email= (TextView) findViewById(R.id.registerEmail);
         telephone= (TextView) findViewById(R.id.registerTelephone);
         textView= (TextView) findViewById(R.id.showmesg);
-        submit= (Button) findViewById(R.id.register_submit);
-        reset= (Button) findViewById(R.id.registerReset);
-        submit.setOnClickListener(this);
-        reset.setOnClickListener(this);
-    }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId())
-        {
-            case R.id.register_submit:
-                submit();
-               break;
-            case R.id.registerReset:
-                reset();
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void submit() {
-        postString(id.getText()+"",username.getText()+"",password.getText()+"",sex.getText()+"",telephone.getText()+"",email.getText()+"");
 
     }
 
-    public void postString(String id,String username,String password,String sex,String telphone,String email)
+
+@Event(value=R.id.register_submit)
+    private void submit(View view) {
+        getdatares();
+    }
+
+
+
+    public void getdatares()
     {
-        String url = mBaseUrl;
-        com.zhy.http.okhttp.OkHttpUtils
-                .postString()
-                .url(url)
-                .mediaType(MediaType.parse("application/json; charset=utf-8"))
-                .content(new Gson().toJson(new User(id,username, password,sex,telphone,email)))
-                .build()
-                .execute(new register.MyStringCallback());
 
+//    File file = new File(uri);
+//    if (!file.exists())
+//    {
+//        Toast.makeText(registerFace.this, "文件不存在，请修改文件路径", Toast.LENGTH_SHORT).show();
+//        return;
+//    }
+        Map<String, String> params = new HashMap<>();
+        // params.put("password", password);
+        params.put("username",username.getText()+"");
+        params.put("password",password.getText()+"");
+        params.put("id",id.getText()+"");
+        params.put("telphone",telephone.getText()+"");
+        params.put("email",email.getText()+"");
+        params.put("sex",sex.getText()+"");
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("APP-Key", "APP-Secret222");
+        headers.put("APP-Secret", "APP-Secret111");
+
+
+        String url = mBaseUrl;
+
+        com.zhy.http.okhttp.OkHttpUtils.post()//
+                //.addFile()//
+                .url(url)//
+                .params(params)//
+                .headers(headers)//
+                .build()//
+                .execute(new register.MyStringCallback());
     }
     public class MyStringCallback extends com.zhy.http.okhttp.callback.StringCallback
     {
@@ -146,7 +168,8 @@ public class register extends Activity implements View.OnClickListener {
         finish();
     }
 
-    private void reset() {
+    @Event(value = R.id.registerReset)
+    private void reset(View view) {
         username.setText("");
         password.setText("");
         sex.setText("");

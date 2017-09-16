@@ -1,4 +1,4 @@
-package com.example.timmy.splashactivity.Activity.Activity.register;
+package com.example.timmy.splashactivity.Activity.Activity.utils;
 
 /**
  * Created by Timmy on 2017/8/15.
