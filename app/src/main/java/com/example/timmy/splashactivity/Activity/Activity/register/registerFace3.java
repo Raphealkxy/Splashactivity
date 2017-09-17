@@ -1,6 +1,7 @@
 package com.example.timmy.splashactivity.Activity.Activity.register;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -153,19 +154,14 @@ public class registerFace3 extends Activity {
                 return;
             }
 
-            // 部分手机会对图片做旋转，这里检测旋转角度
-            //  int degree = FaceUtil.readPictureDegree(fileSrc);
-            //    if (degree != 0) {
-            // 把图片旋转为正的方向
-            //       mImage = FaceUtil.rotateImage(degree, mImage);
-            //    }
+            final String finalFileSrc = fileSrc;
+            new Thread(new Runnable() {
+           @Override
+           public void run() {
+               uploadFile(finalFileSrc,ID,username);
 
-            //  ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-            //可根据流量及网络状况对图片进行压缩
-            // mImage.compress(Bitmap.CompressFormat.JPEG, 80, baos);
-            //   mImageData = baos.toByteArray();
-            uploadFile(fileSrc,ID,username);
+           }
+       }).start();
             imageView.setImageBitmap(mImage);
         }
 
@@ -284,7 +280,7 @@ public class registerFace3 extends Activity {
         Intent intent=new Intent(this,registerSuccess.class);
         intent.putExtra("Id",ID);
         intent.putExtra("username",username);
-        startActivity(intent);
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
         finish();
     }
 }

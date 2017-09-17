@@ -1,15 +1,21 @@
 package com.example.timmy.splashactivity.Activity.Activity.login;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chenenyu.router.Router;
+import com.chenenyu.router.annotation.Route;
 import com.example.timmy.splashactivity.Activity.Activity.MainActivity;
 import com.example.timmy.splashactivity.Activity.Activity.utils.Code;
 import com.example.timmy.splashactivity.Activity.Activity.register.register;
@@ -31,6 +37,7 @@ import static android.content.ContentValues.TAG;
 
 
 @ContentView(R.layout.activity_login_modified)
+@Route("result")
 public class loginActivity extends Activity {
 
 
@@ -47,7 +54,15 @@ public class loginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+
         x.view().inject(this);
+        Router.initialize(this);
+
+        Transition slide = TransitionInflater.from(this).inflateTransition(R.transition.slide);
+        getWindow().setExitTransition(slide);
+        getWindow().setEnterTransition(slide);
+        getWindow().setReenterTransition(slide);
         //透明状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         //透明导航栏
@@ -69,16 +84,21 @@ public class loginActivity extends Activity {
 @Event(value=R.id.register_user)
     private void direct(View view) {
         Intent intent=new Intent(this,register.class);
-        startActivity(intent);
+        startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
 
 
-        finish();
+      //  finish();
     }
 @Event(value=R.id.login)
     private void submit(View view) {
         Toast.makeText(loginActivity.this, "hahah", Toast.LENGTH_SHORT).show();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                loginCheck(username.getText()+"",password.getText()+"");
 
-        loginCheck(username.getText()+"",password.getText()+"");
+            }
+        }).start();
 
     }
 
@@ -169,8 +189,9 @@ public void loginCheck(String username,String password)
 
     private void loginsuccess() {
         Intent intent=new Intent(this,MainActivity.class);
-        startActivity(intent);
-        finish();
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+      //  overridePendingTransition(R.anim.enter_anim,R.anim.exit_anim);
+     //   finish();
     }
 
 }

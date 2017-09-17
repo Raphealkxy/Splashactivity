@@ -1,7 +1,9 @@
 package com.example.timmy.splashactivity.Activity.Activity.register;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,7 +32,7 @@ import okhttp3.Request;
 
 import static android.content.ContentValues.TAG;
 
-@ContentView(R.layout.activity_register)
+@ContentView(R.layout.activity_register_modified)
 public class register extends Activity {
 
     private TextView id;
@@ -53,6 +55,13 @@ public class register extends Activity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         //透明导航栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        //取消设置透明状态栏,使 ContentView 内容不再覆盖状态栏
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        //需要设置这个 flag 才能调用 setStatusBarColor 来设置状态栏颜色
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        //设置状态栏颜色
+        int mycolor = getResources().getColor(R.color.mystatuscolor);
+        getWindow().setStatusBarColor(mycolor);
          BaseUrl=this.getResources().getString(R.string.BaseUrl);
         mBaseUrl = BaseUrl+"action_getdata";
         initUI();
@@ -74,7 +83,14 @@ public class register extends Activity {
 
 @Event(value=R.id.register_submit)
     private void submit(View view) {
-        getdatares();
+
+    new Thread(new Runnable() {
+        @Override
+        public void run() {
+            getdatares();
+
+        }
+    }).start();
     }
 
 
@@ -163,7 +179,7 @@ public class register extends Activity {
         Intent intent=new Intent(this,registerFace.class);
         intent.putExtra("id",id.getText()+"");
         intent.putExtra("username",username.getText()+"");
-        startActivity(intent);
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
 
         finish();
     }

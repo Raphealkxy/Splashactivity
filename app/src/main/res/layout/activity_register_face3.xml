@@ -8,7 +8,7 @@
     tools:context="com.example.timmy.splashactivity.Activity.Activity.register.registerFace3">
 
     <LinearLayout
-        android:background="#2679ca"
+        android:background="@color/commoncolor"
         android:id="@+id/registerBar"
         android:layout_width="match_parent"
         android:layout_height="36dp">

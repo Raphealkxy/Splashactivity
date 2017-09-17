@@ -1,6 +1,7 @@
 package com.example.timmy.splashactivity.Activity.Activity.register;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -142,40 +143,25 @@ public class registerFace extends Activity{
             }
             // 获取图片保存路径
             fileSrc = FaceUtil.getImagePath(registerFace.this);
-     //       showTip(fileSrc);
-            // 获取图片的宽和高
+
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = false;
             mImage = BitmapFactory.decodeFile(fileSrc, options);
 
-            // 压缩图片
-//            options.inSampleSize = Math.max(1, (int) Math.ceil(Math.max(
-//                    (double) options.outWidth / 1024f,
-//                    (double) options.outHeight / 1024f)));
-//            options.inJustDecodeBounds = false;
-     //       mImage = BitmapFactory.decodeFile(fileSrc, options);
 
-
-            // 若mImageBitmap为空则图片信息不能正常获取
             if(null == mImage) {
                 showTip("图片信息无法正常获取！");
                 return;
             }
 
-            // 部分手机会对图片做旋转，这里检测旋转角度
-          //  int degree = FaceUtil.readPictureDegree(fileSrc);
-        //    if (degree != 0) {
-                // 把图片旋转为正的方向
-         //       mImage = FaceUtil.rotateImage(degree, mImage);
-        //    }
+            final String finalFileSrc = fileSrc;
+            new Thread(new Runnable() {
+         @Override
+         public void run() {
+             multiFileUpload(finalFileSrc,ID,username);
 
-          //  ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-            //可根据流量及网络状况对图片进行压缩
-           // mImage.compress(Bitmap.CompressFormat.JPEG, 80, baos);
-         //   mImageData = baos.toByteArray();
-         //  uploadFile(fileSrc,ID,username);
-            multiFileUpload(fileSrc,ID,username);
+         }
+     }).start();
             imageView.setImageBitmap(mImage);
         }
 
@@ -202,34 +188,6 @@ public class registerFace extends Activity{
                 });
     }
 
-//    public void uploadFile(String uri,String ID,String username)
-//    {
-//
-//        File file = new File(uri);
-//        if (!file.exists())
-//        {
-//            Toast.makeText(registerFace.this, "文件不存在，请修改文件路径", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//        Map<String, String> params = new HashMap<>();
-//        params.put("ID", ID);
-//        params.put("username",username);
-//
-//        Map<String, String> headers = new HashMap<>();
-//        headers.put("APP-Key", "APP-Secret222");
-//        headers.put("APP-Secret", "APP-Secret111");
-//
-//
-//        String url = mBaseUrl;
-//
-//        com.zhy.http.okhttp.OkHttpUtils.post()//
-//                .addFile("upload", ID+"_01"+".png", file)//
-//                .url(url)//
-//                .params(params)//
-//                .headers(headers)//
-//                .build()//
-//                .execute(new registerFace.MyStringCallback());
-//    }
 
     public void multiFileUpload(String uri,String ID,String username)
     {
@@ -318,7 +276,7 @@ public class registerFace extends Activity{
         Intent intent=new Intent(this,registerFace2.class);
         intent.putExtra("Id",ID);
         intent.putExtra("username",username);
-        startActivity(intent);
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
         finish();
     }
 }

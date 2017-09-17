@@ -1,10 +1,14 @@
 package com.example.timmy.splashactivity.Activity.Activity.login;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
@@ -43,7 +47,14 @@ public class login extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+      //  x.view().inject(this);
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         x.view().inject(this);
+
+        Transition slide = TransitionInflater.from(this).inflateTransition(R.transition.fade);
+        getWindow().setExitTransition(slide);
+        getWindow().setEnterTransition(slide);
+        getWindow().setReenterTransition(slide);
         //透明状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         //透明导航栏
@@ -64,16 +75,22 @@ public class login extends Activity{
     @Event(value = R.id.register_user)
     private void direct(View view) {
         Intent intent=new Intent(this,register.class);
-        startActivity(intent);
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
 
 
-        finish();
+      //  finish();
     }
 @Event(value = R.id.login)
     private void submit(View view) {
         Toast.makeText(login.this, "hahah", Toast.LENGTH_SHORT).show();
+       new Thread(new Runnable() {
+           @Override
+           public void run() {
+               postString(username.getText()+"",password.getText()+"");
 
-        postString(username.getText()+"",password.getText()+"");
+           }
+       }).start();
+
 
     }
 

@@ -1,13 +1,19 @@
 package com.example.timmy.splashactivity.Activity.Activity;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Bundle;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.Window;
 import android.view.WindowManager;
 
+import com.chenenyu.router.Router;
+import com.chenenyu.router.annotation.Route;
 import com.example.timmy.splashactivity.Activity.Activity.login.loginActivity;
 import com.example.timmy.splashactivity.R;
 
@@ -25,6 +31,8 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
+        Router.initialize(this);
+
         //让界面延迟执行，注意线程是本线程，不是新开辟的线程
         //透明状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -45,8 +53,9 @@ public class SplashActivity extends Activity {
      */
     private void startMainActivity() {
 
-       Intent intent=new Intent(this,loginActivity.class);
-   startActivity(intent);
+  //     Intent intent=new Intent(this,loginActivity.class);
+  // startActivity(intent);
+        Router.build("result").go(this);
         finish();
 
     }

@@ -1,6 +1,7 @@
 package com.example.timmy.splashactivity.Activity.Activity.register;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -156,8 +157,14 @@ public class registerFace2 extends Activity{
                 return;
             }
 
+            final String finalFileSrc = fileSrc;
+            new Thread(new Runnable() {
+               @Override
+               public void run() {
+                   uploadFile(finalFileSrc,ID,username);
 
-            uploadFile(fileSrc,ID,username);
+               }
+           }).start();
             imageView.setImageBitmap(mImage);
         }
 
@@ -275,7 +282,7 @@ public class registerFace2 extends Activity{
         Intent intent=new Intent(this,registerFace3.class);
         intent.putExtra("Id",ID);
         intent.putExtra("username",username);
-        startActivity(intent);
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
         finish();
     }
 }

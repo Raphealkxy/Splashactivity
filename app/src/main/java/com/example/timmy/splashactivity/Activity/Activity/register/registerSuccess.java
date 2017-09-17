@@ -1,6 +1,7 @@
 package com.example.timmy.splashactivity.Activity.Activity.register;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -40,7 +41,7 @@ public class registerSuccess extends Activity implements View.OnClickListener {
         {
             case R.id.rebacktologin:
                 Intent intent=new Intent(this,loginActivity.class);
-                startActivity(intent);
+                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
                 finish();
                 break;
             default:

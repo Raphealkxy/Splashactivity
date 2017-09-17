@@ -1,6 +1,7 @@
 package com.example.timmy.splashactivity.Activity.Activity.getDatafromDb;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -135,7 +136,7 @@ public class requestUserData extends Activity {
     private void direct() {
         Intent intent=new Intent(this,getDataFromDb.class);
        intent.putExtra("content",content);
-        startActivity(intent);
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
 
         finish();
     }

@@ -9,7 +9,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="#2679ca"
+    android:background="@color/commoncolor"
     android:id="@+id/relativeLayout">
     <!--<Button-->
         <!--android:id="@+id/button_backward"-->

@@ -9,7 +9,7 @@
 
 
     <LinearLayout
-        android:background="#2679ca"
+        android:background="@color/commoncolor"
         android:id="@+id/bar"
         android:layout_width="match_parent"
         android:layout_height="36dp">
