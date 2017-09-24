@@ -11,20 +11,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.timmy.splashactivity.Activity.Activity.utils.Code;
+import com.example.timmy.splashactivity.Activity.Activity.HandlerResult;
+import com.example.timmy.splashactivity.Activity.Activity.NetRequest;
 import com.example.timmy.splashactivity.Activity.Activity.utils.FaceUtil;
+import com.example.timmy.splashactivity.Activity.Activity.utils.ToastUtils;
 import com.example.timmy.splashactivity.R;
-import com.google.gson.Gson;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -34,10 +31,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import okhttp3.Call;
-import okhttp3.Request;
-
-import static android.content.ContentValues.TAG;
 
 @ContentView(R.layout.activity_register_face2)
 public class registerFace2 extends Activity{
@@ -128,7 +121,7 @@ public class registerFace2 extends Activity{
             FaceUtil.cropPicture(this, Uri.fromFile(new File(fileSrc)));
         } else if (requestCode == REQUEST_CAMERA_IMAGE) {
             if (null == mPictureFile) {
-                showTip("拍照失败，请重试");
+                ToastUtils.show(registerFace2.this,"拍照失败，请重试",2);
                 return;
             }
 
@@ -153,18 +146,18 @@ public class registerFace2 extends Activity{
 
 
             if(null == mImage) {
-                showTip("图片信息无法正常获取！");
+                ToastUtils.show(registerFace2.this,"图片信息无法正常获取！",2);
+
                 return;
             }
 
             final String finalFileSrc = fileSrc;
-            new Thread(new Runnable() {
-               @Override
-               public void run() {
-                   uploadFile(finalFileSrc,ID,username);
-
-               }
-           }).start();
+            Map<String, String> params = new HashMap<>();
+            params.put("ID", ID);
+            params.put("username",username);
+            NetRequest netRequest=new NetRequest(registerFace2.this,mBaseUrl,params,2,finalFileSrc,2,ID);
+            netRequest.handlerResult = new registerFace2.myHandlerResult();
+            netRequest.execute();
             imageView.setImageBitmap(mImage);
         }
 
@@ -172,13 +165,22 @@ public class registerFace2 extends Activity{
 
 
 
-
     }
 
-    private void showTip(final String str) {
-        mToast.setText(str);
-        mToast.show();
+    public class myHandlerResult extends HandlerResult {
+
+        @Override
+        public void success() {
+            Toast.makeText(registerFace2.this, "人脸注册成功", Toast.LENGTH_SHORT).show();
+            direct();
+        }
+
+        @Override
+        public void failed() {
+            ToastUtils.show(registerFace2.this,"人脸注册失败请重新上传照片",2);
+        }
     }
+
 
     private void updateGallery(String filename) {
         MediaScannerConnection.scanFile(this, new String[] {filename}, null,
@@ -191,93 +193,9 @@ public class registerFace2 extends Activity{
                 });
     }
 
-    public void uploadFile(String uri,String ID,String username)
-    {
-
-        File file = new File(uri);
-        if (!file.exists())
-        {
-            Toast.makeText(registerFace2.this, "文件不存在，请修改文件路径", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        Map<String, String> params = new HashMap<>();
-        params.put("ID", ID);
-        params.put("username",username);
-
-        Map<String, String> headers = new HashMap<>();
-        headers.put("APP-Key", "APP-Secret222");
-        headers.put("APP-Secret", "APP-Secret111");
 
 
-        String url = mBaseUrl;
 
-        OkHttpUtils.post()//
-                .addFile("upload", ID+"_02"+".png", file)//
-                .url(url)//
-                .params(params)//
-                .headers(headers)//
-                .build()//
-                .execute(new registerFace2.MyStringCallback());
-    }
-
-    public class MyStringCallback extends StringCallback
-    {
-        @Override
-        public void onBefore(Request request, int id)
-        {
-            setTitle("loading...");
-        }
-
-        @Override
-        public void onAfter(int id)
-        {
-            setTitle("Sample-okHttp");
-        }
-
-        @Override
-        public void onError(Call call, Exception e, int id)
-        {
-            e.printStackTrace();
-            showTip("onError:" + e.getMessage());
-        }
-
-        @Override
-        public void onResponse(String response, int id)
-        {
-            Log.e(TAG, "onResponse：complete");
-            showTip("onResponse:" + response);
-
-//            switch (id)
-//            {
-//                case 100:
-//                    Toast.makeText(registerFace2.this, "http", Toast.LENGTH_SHORT).show();
-//                    break;
-//                case 101:
-//                    Toast.makeText(registerFace2.this, "https", Toast.LENGTH_SHORT).show();
-//                    break;
-//            }
-            Gson gson=new Gson();
-            Code code=gson.fromJson(response,Code.class);
-            if(code.getCode()==2)
-            {
-                Toast.makeText(registerFace2.this, "人脸注册成功", Toast.LENGTH_SHORT).show();
-                direct();
-
-            }else
-            {
-                Toast.makeText(registerFace2.this, "人脸注册失败请重新上传照片", Toast.LENGTH_SHORT).show();
-
-            }
-            //  direct();
-        }
-
-        @Override
-        public void inProgress(float progress, long total, int id)
-        {
-            Log.e(TAG, "inProgress:" + progress);
-            //  mProgressBar.setProgress((int) (100 * progress));
-        }
-    }
     private void direct() {
         Intent intent=new Intent(this,registerFace3.class);
         intent.putExtra("Id",ID);

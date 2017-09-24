@@ -80,7 +80,7 @@ public class forthpager extends BasePager {
         super.initdata();
         LogUtil.e("第四页的数据被初始化了");
           //初始化数据
-       datas=new String[]{"个人信息","应用设置","应用安全"};
+       datas=new String[]{"个人信息","账号设置","应用安全"};
         datas_2=new String[]{"推送设置","清除缓存","关于软件"};
         //设置设置适配器
 mforthPagerAdapter=new forthPagerAdapter(context,datas);

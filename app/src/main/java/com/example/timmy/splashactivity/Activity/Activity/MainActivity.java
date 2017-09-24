@@ -28,9 +28,9 @@ import java.util.ArrayList;
 public class MainActivity extends FragmentActivity {
 
     private FrameLayout frameLayout;
-    private ArrayList<BasePager> basePagers;
+    private static ArrayList<BasePager> basePagers;
     private RadioGroup radioGroup;
-    private int positon;
+    private static  int positon;
     private TextView textView_tab;
 
     @Override
@@ -90,26 +90,27 @@ public class MainActivity extends FragmentActivity {
         //开启事务
         android.support.v4.app.FragmentTransaction ft = manager.beginTransaction();
         //替换
-        ft.replace(R.id.fl_main_content, new Fragment() {
+
+        ft.replace(R.id.fl_main_content,new myFragment());
 
 
-                    @Nullable
-                    @Override
-                    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-                        BasePager basePager = getPager();
-                        if (basePager != null)
-                            return basePager.rootview;
-                        return super.onCreateView(inflater, container, savedInstanceState);
-                    }
-                }
 
 
-        );
         //提交事务
         ft.commit();
     }
-
-    private BasePager getPager() {
+    public static class myFragment extends Fragment{
+        @Nullable
+        @Override
+        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            BasePager b1=getPager();
+            if (b1!=null){
+                return b1.rootview;
+            }
+            return null;
+        }
+    }
+    public static   BasePager getPager() {
         BasePager basePager = basePagers.get(positon);
         if (basePager != null&&!basePager.isInitData) {
             basePager.initdata();
