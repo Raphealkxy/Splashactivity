@@ -37,5 +37,5 @@ dependencies {
     compile project(':okhttputils')
     compile 'org.xutils:xutils:3.5.0'
     compile 'com.android.support:support-v4:25.3.1'
-
+    compile project(':commonlibrary')
 }

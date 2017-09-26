@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.chenenyu.router.Router;
 import com.chenenyu.router.annotation.Route;
+import com.example.commonlibrary.utils.SPUtils;
 import com.example.timmy.splashactivity.Activity.Activity.HandlerResult;
 import com.example.timmy.splashactivity.Activity.Activity.MainActivity;
 import com.example.timmy.splashactivity.Activity.Activity.NetRequest;
@@ -41,6 +42,7 @@ public class loginActivity extends Activity {
     private String BaseUrl="";
     private String mBaseUrl="";
     private NetRequest netrequest;
+    private SPUtils spUtils;
 
 
 
@@ -63,6 +65,24 @@ public class loginActivity extends Activity {
          BaseUrl=this.getString(R.string.BaseUrl);
         mBaseUrl = BaseUrl+"action_CheckLogin";
         init();
+        initdate();
+    }
+
+    private void initdate() {
+        if(SPUtils.getInstance("Login_account")!=null) {
+            spUtils = SPUtils.getInstance("Login_account");
+            String loginStatus = spUtils.getString("loginStatus");
+            if (loginStatus.equals("login_ok")) {
+            //
+                //    ToastUtils.show(this,loginStatus,2);
+
+                loginsuccess();
+            } else {
+                return;
+            }
+        }else{
+            return;
+        }
     }
 
     private void init() {
@@ -97,6 +117,7 @@ public class loginActivity extends Activity {
 
         @Override
         public void success() {
+
        loginsuccess();
         }
 
@@ -109,8 +130,9 @@ public class loginActivity extends Activity {
 
     private void loginsuccess() {
         Intent intent=new Intent(this,MainActivity.class);
-        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-
+      //  startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        startActivity(intent);
+       //  finish();
     }
 
 }

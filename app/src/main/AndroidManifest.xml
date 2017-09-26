@@ -29,48 +29,42 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:name=".Activity.Activity.myApplocation"
         android:allowBackup="true"
         android:icon="@drawable/local"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".Activity.Activity.SplashActivity">
-
-        </activity>
-        <activity
-            android:name=".Activity.Activity.MainActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.Activity.MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden">
+
             <!-- 当前activity自启动一次 -->
         </activity>
         <activity
             android:name=".Activity.Activity.login.loginActivity"
-            android:launchMode="singleTask"></activity>
+            android:launchMode="singleTask" />
         <activity android:name=".Activity.Activity.forthpage.TitleActivity" />
-        <activity android:name=".Activity.Activity.aboutme.aboutme">
-
-        </activity>
+        <activity android:name=".Activity.Activity.aboutme.aboutme"></activity>
         <activity android:name=".Activity.Activity.Isv.third_register" />
         <activity android:name=".Activity.Activity.Isv.third_check" />
         <activity android:name=".Activity.Activity.face.faceDemo" />
         <activity android:name=".Activity.Activity.register.registerSuccess" />
         <activity android:name=".Activity.Activity.login.loginSuccess" />
-        <activity android:name=".Activity.Activity.register.registerFace"></activity>
+        <activity android:name=".Activity.Activity.register.registerFace" />
         <activity android:name=".Activity.Activity.register.register" />
         <activity android:name=".Activity.Activity.register.registerFace2" />
         <activity android:name=".Activity.Activity.register.registerFace3" />
-        <activity android:name=".Activity.Activity.getDatafromDb.getDataFromDb"></activity>
-
-
-
-        <activity android:name=".Activity.Activity.getDatafromDb.requestUserData">
-
-        </activity>
+        <activity android:name=".Activity.Activity.getDatafromDb.getDataFromDb" />
+        <activity android:name=".Activity.Activity.getDatafromDb.requestUserData"></activity>
+        <activity android:name=".Activity.Activity.myApplocation"></activity>
     </application>
 
 </manifest>

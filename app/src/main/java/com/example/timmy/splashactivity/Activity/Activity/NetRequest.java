@@ -78,7 +78,7 @@ public class NetRequest {
                     }
                     break;
                 case  NET_ERROR:
-                    ToastUtils.show(context,"注册失败",2);
+                    ToastUtils.show(context,"网络出现异常",2);
                     break;
                 default:
                     break;

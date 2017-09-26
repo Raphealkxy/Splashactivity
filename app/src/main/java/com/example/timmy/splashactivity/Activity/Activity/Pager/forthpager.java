@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.commonlibrary.utils.SPUtils;
 import com.example.timmy.splashactivity.Activity.Activity.aboutme.aboutme;
 import com.example.timmy.splashactivity.Activity.Activity.adapter.forthPagerAdapter;
 import com.example.timmy.splashactivity.Activity.Activity.base.BasePager;
@@ -33,6 +34,7 @@ public class forthpager extends BasePager {
         super(content);
     }
     private Button layout;
+    private SPUtils spUtils;
     @Override
     public View initVeiw() {
         LogUtil.e("第四页已经被初始化了");
@@ -43,6 +45,8 @@ public class forthpager extends BasePager {
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                spUtils=SPUtils.getInstance("Login_account");
+                spUtils.clear();
                 Intent logoutIntent = new Intent(context, loginActivity.class);
                 logoutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(logoutIntent);

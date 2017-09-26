@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.example.commonlibrary.utils.SPUtils;
 import com.example.timmy.splashactivity.Activity.Activity.Pager.firstpager;
 import com.example.timmy.splashactivity.Activity.Activity.Pager.forthpager;
 import com.example.timmy.splashactivity.Activity.Activity.Pager.secondpager;
@@ -32,12 +34,14 @@ public class MainActivity extends FragmentActivity {
     private RadioGroup radioGroup;
     private static  int positon;
     private TextView textView_tab;
+    private SPUtils spUtils;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
-
+       initdata();
         textView_tab= (TextView) findViewById(R.id.Tab_text_1);
         radioGroup = (RadioGroup) findViewById(R.id.rg_bottom_tag);
         basePagers = new ArrayList<>();
@@ -52,6 +56,12 @@ public class MainActivity extends FragmentActivity {
         radioGroup.check(R.id.rb_firstPage);
 
 
+    }
+
+    private void initdata() {
+        spUtils= SPUtils.getInstance("Login_account");
+    //    spUtils.put("username",username);
+        spUtils.put("loginStatus","login_ok");
     }
 
     class myOnCheckedChangeLister implements RadioGroup.OnCheckedChangeListener {
