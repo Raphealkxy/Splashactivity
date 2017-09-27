@@ -22,6 +22,7 @@ import com.example.timmy.splashactivity.Activity.Activity.NetRequest;
 import com.example.timmy.splashactivity.Activity.Activity.utils.FaceUtil;
 import com.example.timmy.splashactivity.Activity.Activity.utils.ToastUtils;
 import com.example.timmy.splashactivity.R;
+import com.timmy.data.UrlUtils;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -44,8 +45,6 @@ public class registerFace2 extends Activity{
     private final int REQUEST_CAMERA_IMAGE = 2;//拍照请求码
     private byte[] mImageData = null;
     private File mPictureFile;
-    private String BaseUrl="";
-    private String mBaseUrl = "";
     private String username="";
     private String ID="";
     @Override
@@ -56,8 +55,7 @@ public class registerFace2 extends Activity{
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         //透明导航栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        BaseUrl=this.getResources().getString(R.string.BaseUrl);
-        mBaseUrl = BaseUrl+"action_upload";
+
         init();
 
     }
@@ -155,7 +153,7 @@ public class registerFace2 extends Activity{
             Map<String, String> params = new HashMap<>();
             params.put("ID", ID);
             params.put("username",username);
-            NetRequest netRequest=new NetRequest(registerFace2.this,mBaseUrl,params,2,finalFileSrc,2,ID);
+            NetRequest netRequest=new NetRequest(registerFace2.this, UrlUtils.NET_REGISTERFACE,params,2,finalFileSrc,2,ID);
             netRequest.handlerResult = new registerFace2.myHandlerResult();
             netRequest.execute();
             imageView.setImageBitmap(mImage);

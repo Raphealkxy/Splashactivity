@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.example.timmy.splashactivity.Activity.Activity.HandlerResult;
 import com.example.timmy.splashactivity.Activity.Activity.NetRequest;
 import com.example.timmy.splashactivity.R;
-
+import com.timmy.data.UrlUtils;
 
 
 import org.xutils.view.annotation.ContentView;
@@ -35,8 +35,6 @@ public class register extends Activity {
     private TextView telephone;
     private TextView email;
     private TextView sex;
-    private String BaseUrl = "";
-    private String mBaseUrl = "";
     private Map<String, String> params;
     private NetRequest netrequest;
 
@@ -63,8 +61,7 @@ public class register extends Activity {
         //设置状态栏颜色
         int mycolor = getResources().getColor(R.color.mystatuscolor);
         getWindow().setStatusBarColor(mycolor);
-        BaseUrl = this.getResources().getString(R.string.BaseUrl);
-        mBaseUrl = BaseUrl + "action_getdata";
+
         initUI();
 
 
@@ -118,7 +115,7 @@ public class register extends Activity {
 
         initdata();
         Toast.makeText(register.this,params.toString(),Toast.LENGTH_SHORT).show();
-       netrequest = new NetRequest(params, mBaseUrl,register.this);
+       netrequest = new NetRequest(params, UrlUtils.NET_REGISTER,register.this);
 
         netrequest.handlerResult = new register.myHandlerResult();
         netrequest.execute();

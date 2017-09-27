@@ -20,6 +20,7 @@ import com.example.timmy.splashactivity.Activity.Activity.NetRequest;
 import com.example.timmy.splashactivity.Activity.Activity.register.register;
 import com.example.timmy.splashactivity.Activity.Activity.utils.ToastUtils;
 import com.example.timmy.splashactivity.R;
+import com.timmy.data.UrlUtils;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -62,8 +63,7 @@ public class loginActivity extends Activity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         //透明导航栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-         BaseUrl=this.getString(R.string.BaseUrl);
-        mBaseUrl = BaseUrl+"action_CheckLogin";
+
         init();
         initdate();
     }
@@ -107,7 +107,7 @@ public class loginActivity extends Activity {
         Map<String, String> params = new HashMap<>();
     params.put("password", password.getText()+"");
     params.put("username",username.getText()+"");
-    netrequest = new NetRequest(params, mBaseUrl,loginActivity.this);
+    netrequest = new NetRequest(params, UrlUtils.NET_LOGIN,loginActivity.this);
 
     netrequest.handlerResult = new loginActivity.myHandlerResult();
     netrequest.execute();
