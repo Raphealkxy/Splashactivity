@@ -1,1 +1,1 @@
-include ':app', ':sample-okhttp', ':okhttputils', ':modifypage', ':commonlibrary'
+include ':app', ':sample-okhttp', ':okhttputils', ':modifypage', ':commonlibrary', ':ConvenientBanner_sample', ':convenientbanner'

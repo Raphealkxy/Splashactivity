@@ -1,6 +1,7 @@
 package com.example.timmy.splashactivity.Activity.Activity.base;
 
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 /**
@@ -13,7 +14,7 @@ import android.view.View;
  * 实现数据和视图分离 a.initView()，孩子强制实现该方法。b.在initdata中初始化子页面数据
  */
 
-public abstract class BasePager {
+public abstract class BasePager extends AppCompatActivity {
 
 
     public final Context context;

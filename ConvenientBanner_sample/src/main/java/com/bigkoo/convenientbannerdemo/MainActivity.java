@@ -1,28 +1,18 @@
-package com.example.timmy.splashactivity.Activity.Activity.Pager;
+package com.bigkoo.convenientbannerdemo;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Gravity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ToxicBakery.viewpager.transforms.ABaseTransformer;
-import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
-import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.ToxicBakery.viewpager.transforms.*;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
-import com.example.timmy.splashactivity.Activity.Activity.adapter.firstPagerAdapter;
-import com.example.timmy.splashactivity.Activity.Activity.base.BasePager;
-import com.example.timmy.splashactivity.Activity.Activity.slide.LocalImageHolderView;
-import com.example.timmy.splashactivity.Activity.Activity.slide.NetworkImageHolderView;
-import com.example.timmy.splashactivity.Activity.Activity.utils.LogUtil;
-import com.example.timmy.splashactivity.R;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -35,12 +25,10 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by Timmy on 2017/7/9.
+ * Created by Sai on 15/7/30.
+ * convenientbanner 控件 的 demo
  */
-
-public class firstpager extends BasePager implements AdapterView.OnItemClickListener, ViewPager.OnPageChangeListener, OnItemClickListener {
-
-
+public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener, ViewPager.OnPageChangeListener, OnItemClickListener {
     private ConvenientBanner convenientBanner;//顶部广告栏控件
     private ArrayList<Integer> localImages = new ArrayList<Integer>();
     private List<String> networkImages;
@@ -53,41 +41,29 @@ public class firstpager extends BasePager implements AdapterView.OnItemClickList
             "http://f.hiphotos.baidu.com/image/pic/item/09fa513d269759ee50f1971ab6fb43166c22dfba.jpg"
     };
 
-    // private ListView listView;
+    private ListView listView;
     private ArrayAdapter transformerArrayAdapter;
     private ArrayList<String> transformerList = new ArrayList<String>();
 
-
-
-
-    private ListView listView;
-    private String[] datas;
-    private firstPagerAdapter mfirstPagerAdapter;
-    public firstpager(Context content) {
-        super(content);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        initViews();
+        init();
     }
 
-    @Override
-    public View initVeiw() {
-      LogUtil.e("首页已经被初始化了");
-      View view=View.inflate(context, R.layout.activity_firstpage,null);
-        convenientBanner = (ConvenientBanner)view.findViewById(R.id.convenientBanner);
-        //   listView = (ListView) findViewById(R.id.listView);
-        transformerArrayAdapter = new ArrayAdapter(context, R.layout.adapter_transformer, transformerList);
-        //listView.setAdapter(transformerArrayAdapter);
-        //  listView.setOnItemClickListener(this);
-        initdeson();
-        return view;
+    private void initViews() {
+        convenientBanner = (ConvenientBanner) findViewById(R.id.convenientBanner);
+        listView = (ListView) findViewById(R.id.listView);
+        transformerArrayAdapter = new ArrayAdapter(this,R.layout.adapter_transformer,transformerList);
+        listView.setAdapter(transformerArrayAdapter);
+        listView.setOnItemClickListener(this);
     }
 
-    @Override
-    public void initdata() {
-        super.initdata();
-        LogUtil.e("首页的数据被初始化了");
+    private void init(){
         initImageLoader();
         loadTestDatas();
-        convenientBanner.startTurning(5000);
-
         //本地图片例子
         convenientBanner.setPages(
                 new CBViewHolderCreator<LocalImageHolderView>() {
@@ -106,13 +82,14 @@ public class firstpager extends BasePager implements AdapterView.OnItemClickList
 //        convenientBanner.setManualPageable(false);//设置不能手动影响
 
         //网络加载例子
-        networkImages = Arrays.asList(images);
+        networkImages= Arrays.asList(images);
         convenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
             @Override
             public NetworkImageHolderView createHolder() {
                 return new NetworkImageHolderView();
             }
-        }, networkImages);
+        },networkImages);
+
 
 
 //手动New并且添加到ListView Header的例子
@@ -133,67 +110,44 @@ public class firstpager extends BasePager implements AdapterView.OnItemClickList
 //        listView.addHeaderView(mConvenientBanner);
     }
 
-    private void initdeson() {
-        String transforemerName = DefaultTransformer.class.getSimpleName();
-        try {
-            Class cls = Class.forName("com.ToxicBakery.viewpager.transforms." + transforemerName);
-            ABaseTransformer transforemer = (ABaseTransformer) cls.newInstance();
-            convenientBanner.getViewPager().setPageTransformer(true, transforemer);
-
-            //部分3D特效需要调整滑动速度
-            if (transforemerName.equals("StackTransformer")) {
-                convenientBanner.setScrollDuration(1200);
-            }
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-    }
-
-
     //初始化网络图片缓存库
-    private void initImageLoader() {
+    private void initImageLoader(){
         //网络图片例子,结合常用的图片缓存库UIL,你可以根据自己需求自己换其他网络图片库
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().
                 showImageForEmptyUri(R.drawable.ic_default_adimage)
                 .cacheInMemory(true).cacheOnDisk(true).build();
 
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
-                context.getApplicationContext()).defaultDisplayImageOptions(defaultOptions)
+                getApplicationContext()).defaultDisplayImageOptions(defaultOptions)
                 .threadPriority(Thread.NORM_PRIORITY - 2)
                 .denyCacheImageMultipleSizesInMemory()
                 .diskCacheFileNameGenerator(new Md5FileNameGenerator())
                 .tasksProcessingOrder(QueueProcessingType.LIFO).build();
         ImageLoader.getInstance().init(config);
     }
-
     /*
- 加入测试Views
- * */
+    加入测试Views
+    * */
     private void loadTestDatas() {
         //本地图片集合
 //        for (int position = 0; position < 5; position++)
 //            localImages.add(getResId("ic_test_" + position, R.drawable.class));
 
 //        //各种翻页效果
-        // transformerList.add(DefaultTransformer.class.getSimpleName());
-        //    transformerList.add(AccordionTransformer.class.getSimpleName());
-//        transformerList.add(BackgroundToForegroundTransformer.class.getSimpleName());
-//        transformerList.add(CubeInTransformer.class.getSimpleName());
-//        transformerList.add(CubeOutTransformer.class.getSimpleName());
-//        transformerList.add(DepthPageTransformer.class.getSimpleName());
-//        transformerList.add(FlipHorizontalTransformer.class.getSimpleName());
-//        transformerList.add(FlipVerticalTransformer.class.getSimpleName());
-//        transformerList.add(ForegroundToBackgroundTransformer.class.getSimpleName());
-//        transformerList.add(RotateDownTransformer.class.getSimpleName());
-//        transformerList.add(RotateUpTransformer.class.getSimpleName());
-//        transformerList.add(StackTransformer.class.getSimpleName());
-//        transformerList.add(ZoomInTransformer.class.getSimpleName());
-//        transformerList.add(ZoomOutTranformer.class.getSimpleName());
+        transformerList.add(DefaultTransformer.class.getSimpleName());
+        transformerList.add(AccordionTransformer.class.getSimpleName());
+        transformerList.add(BackgroundToForegroundTransformer.class.getSimpleName());
+        transformerList.add(CubeInTransformer.class.getSimpleName());
+        transformerList.add(CubeOutTransformer.class.getSimpleName());
+        transformerList.add(DepthPageTransformer.class.getSimpleName());
+        transformerList.add(FlipHorizontalTransformer.class.getSimpleName());
+        transformerList.add(FlipVerticalTransformer.class.getSimpleName());
+        transformerList.add(ForegroundToBackgroundTransformer.class.getSimpleName());
+        transformerList.add(RotateDownTransformer.class.getSimpleName());
+        transformerList.add(RotateUpTransformer.class.getSimpleName());
+        transformerList.add(StackTransformer.class.getSimpleName());
+        transformerList.add(ZoomInTransformer.class.getSimpleName());
+        transformerList.add(ZoomOutTranformer.class.getSimpleName());
 
         transformerArrayAdapter.notifyDataSetChanged();
     }
@@ -223,7 +177,7 @@ public class firstpager extends BasePager implements AdapterView.OnItemClickList
         convenientBanner.startTurning(5000);
     }
 
-    // 停止自动翻页
+     // 停止自动翻页
     @Override
     protected void onPause() {
         super.onPause();
@@ -245,24 +199,24 @@ public class firstpager extends BasePager implements AdapterView.OnItemClickList
 //        convenientBanner.setCanLoop(!convenientBanner.isCanLoop());
 
 
-//        String transforemerName = transformerList.get(position);
-//        try {
-//            Class cls = Class.forName("com.ToxicBakery.viewpager.transforms." + transforemerName);
-//            ABaseTransformer transforemer = (ABaseTransformer) cls.newInstance();
-//            convenientBanner.getViewPager().setPageTransformer(true, transforemer);
-//
-//            //部分3D特效需要调整滑动速度
-//            if (transforemerName.equals("StackTransformer")) {
-//                convenientBanner.setScrollDuration(1200);
-//            }
-//
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (InstantiationException e) {
-//            e.printStackTrace();
-//        } catch (IllegalAccessException e) {
-//            e.printStackTrace();
-//        }
+        String transforemerName = transformerList.get(position);
+        try {
+            Class cls = Class.forName("com.ToxicBakery.viewpager.transforms." + transforemerName);
+            ABaseTransformer transforemer= (ABaseTransformer)cls.newInstance();
+            convenientBanner.getViewPager().setPageTransformer(true,transforemer);
+
+            //部分3D特效需要调整滑动速度
+            if(transforemerName.equals("StackTransformer")){
+                convenientBanner.setScrollDuration(1200);
+            }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -273,7 +227,7 @@ public class firstpager extends BasePager implements AdapterView.OnItemClickList
 
     @Override
     public void onPageSelected(int position) {
-        Toast.makeText(context, "监听到翻到第" + position + "了", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"监听到翻到第"+position+"了",Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -282,6 +236,6 @@ public class firstpager extends BasePager implements AdapterView.OnItemClickList
 
     @Override
     public void onItemClick(int position) {
-        Toast.makeText(context, "点击了第" + position + "个", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"点击了第"+position+"个",Toast.LENGTH_SHORT).show();
     }
 }
