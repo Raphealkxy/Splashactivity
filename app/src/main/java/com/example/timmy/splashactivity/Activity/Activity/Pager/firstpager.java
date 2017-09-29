@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,8 @@ import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
+import com.example.timmy.splashactivity.Activity.Activity.adapter.ItemBean2;
+import com.example.timmy.splashactivity.Activity.Activity.adapter.Textimg2Adapter;
 import com.example.timmy.splashactivity.Activity.Activity.adapter.firstPagerAdapter;
 import com.example.timmy.splashactivity.Activity.Activity.base.BasePager;
 import com.example.timmy.splashactivity.Activity.Activity.slide.LocalImageHolderView;
@@ -32,13 +35,25 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.example.timmy.splashactivity.R.id.view;
 
 /**
  * Created by Timmy on 2017/7/9.
  */
 
 public class firstpager extends BasePager implements AdapterView.OnItemClickListener, ViewPager.OnPageChangeListener, OnItemClickListener {
+
+
+    private ListView mListview;
+    private int[] imageidleft;
+    private int []imageidright;
+    private String[] name;
+
+
 
 
     private ConvenientBanner convenientBanner;//顶部广告栏控件
@@ -57,6 +72,8 @@ public class firstpager extends BasePager implements AdapterView.OnItemClickList
     private ArrayAdapter transformerArrayAdapter;
     private ArrayList<String> transformerList = new ArrayList<String>();
 
+    private Textimg2Adapter adapter2;
+    private List<ItemBean2> data2;
 
 
 
@@ -72,18 +89,40 @@ public class firstpager extends BasePager implements AdapterView.OnItemClickList
       LogUtil.e("首页已经被初始化了");
       View view=View.inflate(context, R.layout.activity_firstpage,null);
         convenientBanner = (ConvenientBanner)view.findViewById(R.id.convenientBanner);
+        mListview = (ListView) view.findViewById(R.id.first_page_listview);
+        mListview.setOnItemClickListener(this);
+
         //   listView = (ListView) findViewById(R.id.listView);
         transformerArrayAdapter = new ArrayAdapter(context, R.layout.adapter_transformer, transformerList);
         //listView.setAdapter(transformerArrayAdapter);
         //  listView.setOnItemClickListener(this);
         initdeson();
+
+      //  mListview = (ListView)view.findViewById(R.id.listview);
+
+        //getData();
+       // initData();
+
         return view;
+    }
+
+
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        //通过view获取其内部的组件，进而进行操作
+        String text = (String) ((TextView)view.findViewById(R.id.text)).getText();
+        //大多数情况下，position和id相同，并且都从0开始
+        String showText = "点击第" + position + "项，文本内容为：" + text + "，ID为：" + id;
+        Toast.makeText(context, showText, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void initdata() {
         super.initdata();
         LogUtil.e("首页的数据被初始化了");
+       // initlistview();
+
         initImageLoader();
         loadTestDatas();
         convenientBanner.startTurning(5000);
@@ -131,6 +170,21 @@ public class firstpager extends BasePager implements AdapterView.OnItemClickList
 //                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
 //                .setOnItemClickListener(this);
 //        listView.addHeaderView(mConvenientBanner);
+
+        data2 = new ArrayList<ItemBean2>();
+
+        name=new String[]{"haha","haha"};
+        imageidright=new int[]{R.drawable.web_icon_right_dis1,R.drawable.web_icon_right_dis1};
+        imageidleft=new int[]{R.drawable.pass,R.drawable.pass};
+        for(int i=0; i<2; i++){
+            ItemBean2 bean = new ItemBean2(imageidleft[i],imageidright[i],name[i]);
+            data2.add(bean);
+        }
+
+        adapter2 = new Textimg2Adapter(context, data2,R.layout.layout_item);
+
+        mListview.setAdapter(adapter2);
+        mListview.setOnItemClickListener(this);
     }
 
     private void initdeson() {
@@ -232,8 +286,8 @@ public class firstpager extends BasePager implements AdapterView.OnItemClickList
     }
 
     //点击切换效果
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+   // @Override
+  //  public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
 //        点击后加入两个内容
 //        localImages.clear();
@@ -264,7 +318,7 @@ public class firstpager extends BasePager implements AdapterView.OnItemClickList
 //            e.printStackTrace();
 //        }
 
-    }
+  //  }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

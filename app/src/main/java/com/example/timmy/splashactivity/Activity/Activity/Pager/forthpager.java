@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.example.commonlibrary.utils.SPUtils;
 import com.example.timmy.splashactivity.Activity.Activity.aboutme.aboutme;
+import com.example.timmy.splashactivity.Activity.Activity.adapter.ItemBean2;
+import com.example.timmy.splashactivity.Activity.Activity.adapter.Textimg2Adapter;
 import com.example.timmy.splashactivity.Activity.Activity.adapter.forthPagerAdapter;
 import com.example.timmy.splashactivity.Activity.Activity.base.BasePager;
 import com.example.timmy.splashactivity.Activity.Activity.forthpage.TitleActivity;
@@ -18,18 +20,31 @@ import com.example.timmy.splashactivity.Activity.Activity.login.loginActivity;
 import com.example.timmy.splashactivity.Activity.Activity.utils.LogUtil;
 import com.example.timmy.splashactivity.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Timmy on 2017/7/9.
  */
 
 public class forthpager extends BasePager {
+
+    private int[] imageidleft;
+    private int []imageidright;
+    private String[] name;
     private TextView textView;
     private View view;
     private ListView listView;
     private ListView listViewtwo;
+    private List<ItemBean2> firstlistviewdata;
+    private List<ItemBean2> secondlistviewdata;
+
     private String[] datas;
     private String[] datas_2;
-    private forthPagerAdapter mforthPagerAdapter;
+   // private forthPagerAdapter mforthPagerAdapter;
+    private Textimg2Adapter textimg2Adapter;
+    private Textimg2Adapter textimg2Adapter1;
+
     public forthpager(Context content) {
         super(content);
     }
@@ -86,9 +101,21 @@ public class forthpager extends BasePager {
           //初始化数据
        datas=new String[]{"个人信息","账号设置","应用安全"};
         datas_2=new String[]{"推送设置","清除缓存","关于软件"};
+        firstlistviewdata = new ArrayList<ItemBean2>();
+        secondlistviewdata = new ArrayList<ItemBean2>();
+        imageidright=new int[]{R.drawable.web_icon_right_dis1,R.drawable.web_icon_right_dis1,R.drawable.web_icon_right_dis1};
+        imageidleft=new int[]{R.drawable.pass,R.drawable.pass,R.drawable.pass};
+        for(int i=0; i<3; i++){
+            ItemBean2 bean = new ItemBean2(imageidleft[i],imageidright[i],datas[i]);
+            ItemBean2 bean1 = new ItemBean2(imageidleft[i],imageidright[i],datas_2[i]);
+
+            firstlistviewdata.add(bean);
+            secondlistviewdata.add(bean1);
+        }
         //设置设置适配器
-mforthPagerAdapter=new forthPagerAdapter(context,datas);
-    listView.setAdapter(mforthPagerAdapter);
-    listViewtwo.setAdapter(new forthPagerAdapter(context,datas_2));
+//mforthPagerAdapter=new forthPagerAdapter(context,datas);
+        textimg2Adapter=new Textimg2Adapter(context,firstlistviewdata,R.layout.layout_item);
+    listView.setAdapter(textimg2Adapter);
+    listViewtwo.setAdapter(new Textimg2Adapter(context,secondlistviewdata,R.layout.layout_item));
     }
 }
