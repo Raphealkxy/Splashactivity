@@ -36,7 +36,19 @@ public class UrlUtils {
      */
     public final  static  String NET_MODIFIED="";
 
+/**
+ * 出勤信息获取按班级
+ */
 
+    public final static  String NET_GETUSERLIST=NET+"action_getuserlist";
+    /**
+     * 出勤信息获取按个人
+     */
+
+
+    /**
+     * 出勤信息获取按。。。
+     */
 
 
 }

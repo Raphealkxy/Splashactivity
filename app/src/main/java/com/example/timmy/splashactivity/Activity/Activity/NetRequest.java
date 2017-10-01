@@ -35,15 +35,17 @@ public class NetRequest {
     private String mUrl;
     private int filenum;
     private String ID;
+    private int type=1;//网络请求类型 1代表验证型 2代表获取实体数据型。
+    public String Content="";
 
-
-    public NetRequest(Map<String, String> params, String mBaseUrl,Context context) {
+    public NetRequest(Map<String, String> params, String mBaseUrl,Context context,int type) {
         this.params = params;
         this.mBaseUrl = mBaseUrl;
         this.context=context;
+        this.type=type;
     }
 
-    public NetRequest(Context context, String mBaseUrl, Map<String, String> params, int requestcode, String mUrl, int filenum, String ID) {
+    public NetRequest(Context context, String mBaseUrl, Map<String, String> params, int requestcode, String mUrl, int filenum, String ID,int type) {
         this.context = context;
         this.mBaseUrl = mBaseUrl;
         this.params = params;
@@ -51,6 +53,7 @@ public class NetRequest {
         this.mUrl = mUrl;
         this.filenum = filenum;
         this.ID = ID;
+        this.type=type;
     }
 
     private Handler mhandler=new Handler()
@@ -63,18 +66,29 @@ public class NetRequest {
             switch (msg.what)
             {
                 case NET_OK:
+                    if(type==1) {
 
-                    Code code= (Code) msg.obj;
-                    if(code.getCode()==2)
-                    {
+                        Code code = (Code) msg.obj;
+                        if (code.getCode() == 2) {
 
-                        handlerResult.success();
+                            handlerResult.success();
 
-                    }else
-                    {
+                        } else {
 
-                        handlerResult.failed();
+                            handlerResult.failed();
 
+                        }
+                    }else{
+                       Content= (String) msg.obj;
+
+                        if(Content!=null){
+                           // ToastUtils.show(context,Content,1);
+                            handlerResult.success();
+
+                        }else {
+                            handlerResult.failed();
+
+                        }
                     }
                     break;
                 case  NET_ERROR:
@@ -144,11 +158,22 @@ public class NetRequest {
         public void onResponse(String response, int id)
         {
             Log.e(TAG, "onResponse：complete");
-            Gson gson=new Gson();
-            Code code=gson.fromJson(response,Code.class);
-            if(code!=null) {
-                message.what = NET_OK;
-                message.obj=code;
+            if(type==1) {
+
+
+                Gson gson = new Gson();
+                Code code = gson.fromJson(response, Code.class);
+                if (code != null) {
+                    message.what = NET_OK;
+                    message.obj = code;
+                }
+            }else{
+                if(response!=null){
+                    message.what=NET_OK;
+                    message.obj=response;
+                  //  Content=response;
+                }
+
             }
             mhandler.sendMessage(message);
 

@@ -153,7 +153,7 @@ public class registerFace2 extends Activity{
             Map<String, String> params = new HashMap<>();
             params.put("ID", ID);
             params.put("username",username);
-            NetRequest netRequest=new NetRequest(registerFace2.this, UrlUtils.NET_REGISTERFACE,params,2,finalFileSrc,2,ID);
+            NetRequest netRequest=new NetRequest(registerFace2.this, UrlUtils.NET_REGISTERFACE,params,2,finalFileSrc,2,ID,1);
             netRequest.handlerResult = new registerFace2.myHandlerResult();
             netRequest.execute();
             imageView.setImageBitmap(mImage);

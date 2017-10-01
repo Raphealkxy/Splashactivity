@@ -161,7 +161,7 @@ public class registerFace3 extends Activity {
             Map<String, String> params = new HashMap<>();
             params.put("ID", ID);
             params.put("username",username);
-            NetRequest netRequest=new NetRequest(registerFace3.this, UrlUtils.NET_REGISTERFACE,params,2,finalFileSrc,1,ID);
+            NetRequest netRequest=new NetRequest(registerFace3.this, UrlUtils.NET_REGISTERFACE,params,2,finalFileSrc,1,ID,1);
             netRequest.handlerResult = new registerFace3.myHandlerResult();
             netRequest.execute();
             imageView.setImageBitmap(mImage);

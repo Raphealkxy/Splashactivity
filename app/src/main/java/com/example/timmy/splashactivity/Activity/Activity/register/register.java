@@ -115,7 +115,7 @@ public class register extends Activity {
 
         initdata();
         Toast.makeText(register.this,params.toString(),Toast.LENGTH_SHORT).show();
-       netrequest = new NetRequest(params, UrlUtils.NET_REGISTER,register.this);
+       netrequest = new NetRequest(params, UrlUtils.NET_REGISTER,register.this,1);
 
         netrequest.handlerResult = new register.myHandlerResult();
         netrequest.execute();

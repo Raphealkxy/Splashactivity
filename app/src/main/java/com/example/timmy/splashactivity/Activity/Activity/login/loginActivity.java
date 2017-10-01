@@ -107,7 +107,7 @@ public class loginActivity extends Activity {
         Map<String, String> params = new HashMap<>();
     params.put("password", password.getText()+"");
     params.put("username",username.getText()+"");
-    netrequest = new NetRequest(params, UrlUtils.NET_LOGIN,loginActivity.this);
+    netrequest = new NetRequest(params, UrlUtils.NET_LOGIN,loginActivity.this,1);
 
     netrequest.handlerResult = new loginActivity.myHandlerResult();
     netrequest.execute();

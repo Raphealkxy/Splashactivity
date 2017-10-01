@@ -151,7 +151,7 @@ public class registerFace extends Activity{
             Map<String, String> params = new HashMap<>();
               params.put("ID", ID);
              params.put("username",username);
-            NetRequest netRequest=new NetRequest(registerFace.this, UrlUtils.NET_REGISTERFACE,params,2,finalFileSrc,1,ID);
+            NetRequest netRequest=new NetRequest(registerFace.this, UrlUtils.NET_REGISTERFACE,params,2,finalFileSrc,1,ID,1);
             netRequest.handlerResult = new registerFace.myHandlerResult();
             netRequest.execute();
 
