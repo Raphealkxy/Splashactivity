@@ -17,6 +17,7 @@ import com.example.timmy.splashactivity.Activity.Activity.base.BasePager;
 import com.example.timmy.splashactivity.Activity.Activity.forthpage.TitleActivity;
 import com.example.timmy.splashactivity.Activity.Activity.login.loginActivity;
 import com.example.commonlibrary.utils.LogUtil;
+import com.example.timmy.splashactivity.Activity.Activity.modify.UpdatePassword;
 import com.example.timmy.splashactivity.R;
 
 import java.util.ArrayList;
@@ -72,7 +73,12 @@ public class forthpager extends BasePager {
                 if(position==0) {
                     Intent intent = new Intent(context, aboutme.class);
                     context.startActivity(intent);
+                }else if(position==1){
+                    Intent intent = new Intent(context, UpdatePassword.class);
+                    context.startActivity(intent);
                 }else {
+
+
                     String data=datas_2[position];
                     Toast.makeText(context, data, Toast.LENGTH_SHORT).show();
                 }
@@ -98,7 +104,7 @@ public class forthpager extends BasePager {
         super.initdata();
         LogUtil.e("第四页的数据被初始化了");
           //初始化数据
-       datas=new String[]{"个人信息","账号设置","应用安全"};
+       datas=new String[]{"个人信息","修改密码","应用安全"};
         datas_2=new String[]{"推送设置","清除缓存","关于软件"};
         firstlistviewdata = new ArrayList<ItemBean2>();
         secondlistviewdata = new ArrayList<ItemBean2>();

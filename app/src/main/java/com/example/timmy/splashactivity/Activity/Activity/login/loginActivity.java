@@ -130,7 +130,10 @@ public class loginActivity extends Activity {
 
     private void loginsuccess() {
         Intent intent=new Intent(this,MainActivity.class);
-      //  startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        intent.putExtra("username",username.getText()+"");
+        intent.putExtra("password",password.getText()+"");
+
+        //  startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
         startActivity(intent);
        //  finish();
     }

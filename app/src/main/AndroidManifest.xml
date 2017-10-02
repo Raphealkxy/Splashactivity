@@ -36,11 +36,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activity.Activity.SplashActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".Activity.Activity.MainActivity"
@@ -56,7 +58,7 @@
             android:name=".Activity.Activity.login.loginActivity"
             android:launchMode="singleTask" />
         <activity android:name=".Activity.Activity.forthpage.TitleActivity" />
-        <activity android:name=".Activity.Activity.aboutme.aboutme"></activity>
+        <activity android:name=".Activity.Activity.aboutme.aboutme" />
         <activity android:name=".Activity.Activity.Isv.third_register" />
         <activity android:name=".Activity.Activity.Isv.third_check" />
         <activity android:name=".Activity.Activity.face.faceDemo" />
@@ -67,8 +69,9 @@
         <activity android:name=".Activity.Activity.register.registerFace2" />
         <activity android:name=".Activity.Activity.register.registerFace3" />
         <activity android:name="com.net.getDataFromDb" />
-        <activity android:name=".Activity.Activity.getDatafromDb.requestUserData"></activity>
-        <activity android:name=".Activity.Activity.myApplocation"></activity>
+        <activity android:name=".Activity.Activity.getDatafromDb.requestUserData" />
+        <activity android:name=".Activity.Activity.myApplocation" />
+        <activity android:name=".Activity.Activity.modify.UpdatePassword"></activity>
     </application>
 
 </manifest>
