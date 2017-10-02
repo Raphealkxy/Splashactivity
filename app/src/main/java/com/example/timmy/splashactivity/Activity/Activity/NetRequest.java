@@ -7,7 +7,7 @@ import android.util.Log;
 
 
 import com.example.timmy.splashactivity.Activity.Activity.utils.Code;
-import com.example.timmy.splashactivity.Activity.Activity.utils.ToastUtils;
+import com.example.commonlibrary.utils.ToastUtils;
 import com.google.gson.Gson;
 
 import java.io.File;

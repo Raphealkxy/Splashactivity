@@ -13,11 +13,10 @@ import com.example.commonlibrary.utils.SPUtils;
 import com.example.timmy.splashactivity.Activity.Activity.aboutme.aboutme;
 import com.example.timmy.splashactivity.Activity.Activity.adapter.ItemBean2;
 import com.example.timmy.splashactivity.Activity.Activity.adapter.Textimg2Adapter;
-import com.example.timmy.splashactivity.Activity.Activity.adapter.forthPagerAdapter;
 import com.example.timmy.splashactivity.Activity.Activity.base.BasePager;
 import com.example.timmy.splashactivity.Activity.Activity.forthpage.TitleActivity;
 import com.example.timmy.splashactivity.Activity.Activity.login.loginActivity;
-import com.example.timmy.splashactivity.Activity.Activity.utils.LogUtil;
+import com.example.commonlibrary.utils.LogUtil;
 import com.example.timmy.splashactivity.R;
 
 import java.util.ArrayList;

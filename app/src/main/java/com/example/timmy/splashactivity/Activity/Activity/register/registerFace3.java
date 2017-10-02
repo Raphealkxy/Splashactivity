@@ -11,24 +11,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.timmy.splashactivity.Activity.Activity.HandlerResult;
 import com.example.timmy.splashactivity.Activity.Activity.NetRequest;
-import com.example.timmy.splashactivity.Activity.Activity.utils.Code;
 import com.example.timmy.splashactivity.Activity.Activity.utils.FaceUtil;
-import com.example.timmy.splashactivity.Activity.Activity.utils.ToastUtils;
+import com.example.commonlibrary.utils.ToastUtils;
 import com.example.timmy.splashactivity.R;
-import com.google.gson.Gson;
 import com.timmy.data.UrlUtils;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -37,11 +31,6 @@ import org.xutils.x;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-
-import okhttp3.Call;
-import okhttp3.Request;
-
-import static android.content.ContentValues.TAG;
 
 @ContentView(R.layout.activity_register_face3)
 public class registerFace3 extends Activity {

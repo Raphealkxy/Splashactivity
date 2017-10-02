@@ -18,7 +18,7 @@ import com.example.timmy.splashactivity.Activity.Activity.HandlerResult;
 import com.example.timmy.splashactivity.Activity.Activity.MainActivity;
 import com.example.timmy.splashactivity.Activity.Activity.NetRequest;
 import com.example.timmy.splashactivity.Activity.Activity.register.register;
-import com.example.timmy.splashactivity.Activity.Activity.utils.ToastUtils;
+import com.example.commonlibrary.utils.ToastUtils;
 import com.example.timmy.splashactivity.R;
 import com.timmy.data.UrlUtils;
 

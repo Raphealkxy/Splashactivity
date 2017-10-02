@@ -1,4 +1,4 @@
-package com.example.timmy.splashactivity.Activity.Activity.utils;
+package com.example.commonlibrary.utils;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

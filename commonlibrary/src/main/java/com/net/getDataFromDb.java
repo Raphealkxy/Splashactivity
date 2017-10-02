@@ -1,4 +1,4 @@
-package com.example.timmy.splashactivity.Activity.Activity.getDatafromDb;
+package com.net;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,7 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.timmy.splashactivity.R;
+
+import com.entity.User;
+import com.example.commonlibrary.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -29,6 +31,7 @@ public class getDataFromDb extends Activity implements AdapterView.OnItemClickLi
     private String content;
     private Toast mToast;
     private List<User>listUser=new ArrayList<User>();
+    private String [] columnName=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,7 @@ public class getDataFromDb extends Activity implements AdapterView.OnItemClickLi
         mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
         Intent intent = getIntent();
         content=intent.getStringExtra("content");
+        columnName=intent.getStringArrayExtra("columName");
         gridview = (GridView) findViewById(R.id.gridview);
         Gson gson = new Gson();
 
@@ -67,7 +71,7 @@ public class getDataFromDb extends Activity implements AdapterView.OnItemClickLi
         mToast.show();
     }
     public void addHeader() {
-        String items[] = { "学号", "姓名", "性别", "密码","电话"};
+        String items[] =columnName;
         for (String strText : items) {
             booleans.add(0);
             list.add(strText);

@@ -20,7 +20,7 @@ import android.widget.Toast;
 import com.example.timmy.splashactivity.Activity.Activity.HandlerResult;
 import com.example.timmy.splashactivity.Activity.Activity.NetRequest;
 import com.example.timmy.splashactivity.Activity.Activity.utils.FaceUtil;
-import com.example.timmy.splashactivity.Activity.Activity.utils.ToastUtils;
+import com.example.commonlibrary.utils.ToastUtils;
 import com.example.timmy.splashactivity.R;
 import com.timmy.data.UrlUtils;
 

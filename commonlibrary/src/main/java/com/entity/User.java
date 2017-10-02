@@ -1,4 +1,4 @@
-package com.example.timmy.splashactivity.Activity.Activity.getDatafromDb;
+package com.entity;
 
 public class User {
        // private int uid;

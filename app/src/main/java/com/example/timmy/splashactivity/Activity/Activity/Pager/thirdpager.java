@@ -1,33 +1,20 @@
 package com.example.timmy.splashactivity.Activity.Activity.Pager;
 
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.timmy.splashactivity.Activity.Activity.HandlerResult;
 import com.example.timmy.splashactivity.Activity.Activity.Isv.third_check;
-import com.example.timmy.splashactivity.Activity.Activity.Isv.third_register;
-import com.example.timmy.splashactivity.Activity.Activity.NetRequest;
 import com.example.timmy.splashactivity.Activity.Activity.adapter.recyclerAdapter;
 import com.example.timmy.splashactivity.Activity.Activity.base.BasePager;
 import com.example.timmy.splashactivity.Activity.Activity.face.faceDemo;
-import com.example.timmy.splashactivity.Activity.Activity.getDatafromDb.getDataFromDb;
 import com.example.timmy.splashactivity.Activity.Activity.getDatafromDb.requestUserData;
-import com.example.timmy.splashactivity.Activity.Activity.utils.LogUtil;
+import com.example.commonlibrary.utils.LogUtil;
 import com.example.timmy.splashactivity.R;
-import com.timmy.data.UrlUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Timmy on 2017/7/9.

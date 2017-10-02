@@ -1,15 +1,11 @@
 package com.example.timmy.splashactivity.Activity.Activity.Pager;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +20,7 @@ import com.example.timmy.splashactivity.Activity.Activity.adapter.firstPagerAdap
 import com.example.timmy.splashactivity.Activity.Activity.base.BasePager;
 import com.example.timmy.splashactivity.Activity.Activity.slide.LocalImageHolderView;
 import com.example.timmy.splashactivity.Activity.Activity.slide.NetworkImageHolderView;
-import com.example.timmy.splashactivity.Activity.Activity.utils.LogUtil;
+import com.example.commonlibrary.utils.LogUtil;
 import com.example.timmy.splashactivity.R;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -35,11 +31,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import static com.example.timmy.splashactivity.R.id.view;
 
 /**
  * Created by Timmy on 2017/7/9.

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="com.example.timmy.splashactivity.Activity.Activity.getDatafromDb.getDataFromDb">
+    tools:context="com.example.timmy.splashactivity.com.net.getDataFromDb">
 
     <GridView
         android:id="@+id/gridview"

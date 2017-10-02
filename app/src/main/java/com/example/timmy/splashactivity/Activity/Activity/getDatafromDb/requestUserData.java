@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,20 +12,14 @@ import android.widget.Toast;
 import com.example.timmy.splashactivity.Activity.Activity.HandlerResult;
 import com.example.timmy.splashactivity.Activity.Activity.NetRequest;
 import com.example.timmy.splashactivity.R;
+import com.net.getDataFromDb;
 import com.timmy.data.UrlUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.Event;
 import org.xutils.x;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import okhttp3.Call;
-import okhttp3.Request;
-
-import static android.content.ContentValues.TAG;
 
 @ContentView(R.layout.activity_request_user_data)
 public class requestUserData extends Activity {
@@ -37,6 +30,7 @@ public class requestUserData extends Activity {
     private String content;
     private Button btn;
     private NetRequest netRequest;
+    private String []data=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +38,12 @@ public class requestUserData extends Activity {
         x.view().inject(this);
         textView= (TextView) findViewById(R.id.showmesg);
        btn= (Button) findViewById(R.id.btn);
+        initdata();
+
+    }
+
+    private void initdata() {
+        data=new String[]{"学号", "姓名", "性别", "密码","电话"};
         Map<String, String> params = new HashMap<>();
         // params.put("password", password);
         params.put("username","kxy");
@@ -70,6 +70,7 @@ public class requestUserData extends Activity {
     private void direct() {
         Intent intent=new Intent(this,getDataFromDb.class);
        intent.putExtra("content",content);
+        intent.putExtra("columName",data);
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
 
         finish();

@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.timmy.splashactivity.Activity.Activity.base.BasePager;
-import com.example.timmy.splashactivity.Activity.Activity.utils.LogUtil;
+import com.example.commonlibrary.utils.LogUtil;
 
 /**
  * Created by Timmy on 2017/7/9.
