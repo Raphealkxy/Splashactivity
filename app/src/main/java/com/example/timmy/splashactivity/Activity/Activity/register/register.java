@@ -10,6 +10,8 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.commonlibrary.utils.EmptyUtils;
+import com.example.commonlibrary.utils.RegexUtils;
 import com.example.timmy.splashactivity.Activity.Activity.HandlerResult;
 import com.example.timmy.splashactivity.Activity.Activity.NetRequest;
 import com.example.timmy.splashactivity.R;
@@ -35,6 +37,7 @@ public class register extends Activity {
     private TextView telephone;
     private TextView email;
     private TextView sex;
+    private TextView okpassword;
     private Map<String, String> params;
     private NetRequest netrequest;
 
@@ -105,13 +108,38 @@ public class register extends Activity {
         email = (TextView) findViewById(R.id.registerEmail);
         telephone = (TextView) findViewById(R.id.registerTelephone);
         textView = (TextView) findViewById(R.id.showmesg);
-
+        okpassword= (TextView) findViewById(R.id.confirm_registerPassword);
 
     }
 
 
     @Event(value = R.id.register_submit)
     private void submit(View view) {
+        if(EmptyUtils.isEmpty(id.getText()+"")||EmptyUtils.isEmpty(username.getText()+"")||EmptyUtils.isEmpty(password.getText()+"")||EmptyUtils.isEmpty(sex.getText()+"")||EmptyUtils.isEmpty(email.getText()+"")||EmptyUtils.isEmpty(telephone.getText()+"")||EmptyUtils.isEmpty(okpassword.getText()+""))
+        {
+            showTip("要填的数据项不能为空");
+            return;
+        }
+        String okpass=okpassword.getText()+"";
+        String pass=password.getText()+"";
+        if(!okpass.equals(pass))
+        {
+            showTip("两次密码输入不一致");
+            return;
+        }
+
+        if(!RegexUtils.isMobileExact(telephone.getText()+""))
+        {
+            showTip("手机格式错误");
+            return;
+        }
+        if(!RegexUtils.isEmail(email.getText()+""))
+        {
+            showTip("邮箱格式应该为xxx@xxx.com");
+            return;
+        }
+
+
 
         initdata();
         Toast.makeText(register.this,params.toString(),Toast.LENGTH_SHORT).show();
