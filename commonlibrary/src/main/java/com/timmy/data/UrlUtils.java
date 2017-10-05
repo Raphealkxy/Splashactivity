@@ -32,9 +32,14 @@ public class UrlUtils {
 
 
     /**
-     * 修改个人信息
+     * 修改个人密码
      */
     public final  static  String NET_MODIFIEDPASSWORD=NET+"action_UpdatePassword";
+
+    /**
+     * 修改个人信息
+     */
+    public final  static  String NET_MODIFIEDINFO=NET+"action_UpdateInfo";
 
 /**
  * 出勤信息获取按班级
