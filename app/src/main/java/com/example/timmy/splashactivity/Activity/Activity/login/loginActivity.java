@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.chenenyu.router.Router;
 import com.chenenyu.router.annotation.Route;
+import com.entity.User;
 import com.example.commonlibrary.utils.SPUtils;
 import com.example.timmy.splashactivity.Activity.Activity.HandlerResult;
 import com.example.timmy.splashactivity.Activity.Activity.MainActivity;
@@ -20,6 +21,7 @@ import com.example.timmy.splashactivity.Activity.Activity.NetRequest;
 import com.example.timmy.splashactivity.Activity.Activity.register.register;
 import com.example.commonlibrary.utils.ToastUtils;
 import com.example.timmy.splashactivity.R;
+import com.google.gson.Gson;
 import com.timmy.data.UrlUtils;
 
 import org.xutils.view.annotation.ContentView;
@@ -44,6 +46,7 @@ public class loginActivity extends Activity {
     private String mBaseUrl="";
     private NetRequest netrequest;
     private SPUtils spUtils;
+    private String content;
 
 
 
@@ -76,7 +79,7 @@ public class loginActivity extends Activity {
             //
                 //    ToastUtils.show(this,loginStatus,2);
 
-                loginsuccess();
+                loginsuccesstwo();
             } else {
                 return;
             }
@@ -107,7 +110,7 @@ public class loginActivity extends Activity {
         Map<String, String> params = new HashMap<>();
     params.put("password", password.getText()+"");
     params.put("username",username.getText()+"");
-    netrequest = new NetRequest(params, UrlUtils.NET_LOGIN,loginActivity.this,1);
+    netrequest = new NetRequest(params, UrlUtils.NET_LOGIN,loginActivity.this,2);
 
     netrequest.handlerResult = new loginActivity.myHandlerResult();
     netrequest.execute();
@@ -117,8 +120,12 @@ public class loginActivity extends Activity {
 
         @Override
         public void success() {
+            content=netrequest.Content;
 
-       loginsuccess();
+
+
+
+            loginsuccess();
         }
 
         @Override
@@ -130,12 +137,20 @@ public class loginActivity extends Activity {
 
     private void loginsuccess() {
         Intent intent=new Intent(this,MainActivity.class);
-        intent.putExtra("username",username.getText()+"");
-        intent.putExtra("password",password.getText()+"");
+        intent.putExtra("userinfo",content);
+    //    intent.putExtra("password",password.getText()+"");
 
         //  startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
         startActivity(intent);
        //  finish();
     }
+
+    private  void loginsuccesstwo()
+    {
+        Intent intent=new Intent(this,MainActivity.class);
+        startActivity(intent);
+
+    }
+
 
 }

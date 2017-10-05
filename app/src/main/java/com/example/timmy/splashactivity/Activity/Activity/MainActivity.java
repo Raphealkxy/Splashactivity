@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.entity.User;
 import com.example.commonlibrary.utils.SPUtils;
 import com.example.commonlibrary.utils.ToastUtils;
 import com.example.timmy.splashactivity.Activity.Activity.Pager.firstpager;
@@ -21,6 +22,7 @@ import com.example.timmy.splashactivity.Activity.Activity.Pager.secondpager;
 import com.example.timmy.splashactivity.Activity.Activity.Pager.thirdpager;
 import com.example.timmy.splashactivity.Activity.Activity.base.BasePager;
 import com.example.timmy.splashactivity.R;
+import com.google.gson.Gson;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.x;
@@ -61,14 +63,23 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void initdata() {
-        username=getIntent().getStringExtra("username");
-        password=getIntent().getStringExtra("password");
+        String content=getIntent().getStringExtra("userinfo");
+            Gson gson=new Gson();
+            User user =gson.fromJson(content,User.class);
+//        username=user.getUserNumber();
+//        password=user.getPassword();
         spUtils= SPUtils.getInstance("Login_account");
     //    spUtils.put("username",username);
-        spUtils.put("loginStatus","login_ok");
-        spUtils.put("username",username);
-        spUtils.put("password",password);
+        if(spUtils.getString("loginStatus").isEmpty()) {
+            spUtils.put("loginStatus","login_ok");
+            spUtils.put("username", user.getUsername());
+            spUtils.put("password", user.getPassword());
+            spUtils.put("userNumber", user.getUserNumber());
+            spUtils.put("Email", user.getEmail());
+            spUtils.put("sex", user.getSex());
+            spUtils.put("telephone", user.getTelephone());
 
+        }
     }
 
     class myOnCheckedChangeLister implements RadioGroup.OnCheckedChangeListener {
